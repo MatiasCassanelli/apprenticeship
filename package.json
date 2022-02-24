@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "prettier": "^2.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js .",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
+  }
+}
