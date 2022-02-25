@@ -1,17 +1,23 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv'
+dotenv.config({ silent: true });
 const app = express();
 const port = 3000;
 
 const BASE_URL = 'https://api.github.com';
 
 const fetchData = async (url) => {
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `token ${process.env.TOKEN}`,
+    },
+  });
   if (response?.ok) {
     return response.json();
   }
   throw response;
-}
+};
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);
@@ -25,20 +31,26 @@ app.get('/projects/:userName/:repository', async (req, res) => {
     const projects = await fetchData(url);
     const cardsByProject = {};
 
-    projects?.forEach(async ({ name: projectName, columns_url }) => {
-      cardsByProject[projectName] = [];
+    for (const { name: projectName, columns_url } of projects) {
+        const projectCards = [];
 
       // fetch columns to get card_url
       const columns = await fetchData(columns_url);
-      columns?.forEach(async ({ cards_url }) => {
-        // fetch card data using card_url returned by each column
+        for (const { cards_url } of columns) {
         const cards = await fetchData(cards_url);
-        cards?.forEach(({ note }) => cardsByProject[projectName].push(note));
-      });
-    });
+          for (const { note, url } of cards) {
+            projectCards.push(note || url);
+          }
+        }
+        if (projectCards.length) {
+          cardsByProject[projectName] = [...projectCards];
+        } else {
+          cardsByProject[projectName] = 'No cards found';
+        }
+    }
     res.send(cardsByProject);
   } catch (error) {
-    res.send(`${error.status} - ${error.statusText}`)
+    res.send(`${error.status} - ${error.statusText}`);
   }
 });
 
