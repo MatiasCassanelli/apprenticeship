@@ -1,6 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 dotenv.config({ silent: true });
 const app = express();
 const port = 3000;
@@ -25,6 +25,7 @@ app.listen(port, () => {
 
 app.get('/projects/:userName/:repository', async (req, res) => {
   const { repository, userName } = req.params;
+  const { regex } = req.query;
   const url = `${BASE_URL}/repos/${userName}/${repository}/projects`;
   try {
     // fetch repo to get project data.
@@ -32,12 +33,13 @@ app.get('/projects/:userName/:repository', async (req, res) => {
     const cardsByProject = {};
 
     for (const { name: projectName, columns_url } of projects) {
+      if (projectName.match(regex) || !regex) {
         const projectCards = [];
 
-      // fetch columns to get card_url
-      const columns = await fetchData(columns_url);
+        // fetch columns to get card_url
+        const columns = await fetchData(columns_url);
         for (const { cards_url } of columns) {
-        const cards = await fetchData(cards_url);
+          const cards = await fetchData(cards_url);
           for (const { note, url } of cards) {
             projectCards.push(note || url);
           }
@@ -47,6 +49,7 @@ app.get('/projects/:userName/:repository', async (req, res) => {
         } else {
           cardsByProject[projectName] = 'No cards found';
         }
+      }
     }
     res.send(cardsByProject);
   } catch (error) {
