@@ -1,10 +1,14 @@
-const fs = require('fs');
+import { readdirSync, statSync } from 'fs';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const filesByExtension = (extension, dir, files = []) => {
-  const foundFiles = fs.readdirSync(dir);
+  const foundFiles = readdirSync(dir);
   foundFiles.forEach((file) => {
     const name = dir + '/' + file;
-    if (fs.statSync(name).isDirectory()) {
+    if (statSync(name).isDirectory()) {
       filesByExtension(extension, name, files);
     } else if (name.match(`${extension}$`)) {
       files.push(name);
@@ -14,6 +18,6 @@ const filesByExtension = (extension, dir, files = []) => {
 };
 
 
-const files = filesByExtension('.asd', __dirname);
+const files = filesByExtension(process.argv[2], __dirname);
 
 console.log(files.length ? files : 'Any file matches that extension');
