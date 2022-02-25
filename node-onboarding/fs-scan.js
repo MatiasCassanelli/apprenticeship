@@ -20,4 +20,10 @@ const filesByExtension = (extension, dir, files = []) => {
 
 const files = filesByExtension(process.argv[2], __dirname);
 
-console.log(files.length ? files : 'Any file matches that extension');
+if (files.length) {
+  files.forEach(file => {
+    console.log(file);
+  });
+} else {
+  console.log('Any file matches that extension');
+}
