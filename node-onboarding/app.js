@@ -1,9 +1,6 @@
-import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config({ silent: true });
-const app = express();
-const port = 3000;
 
 const BASE_URL = 'https://api.github.com';
 
@@ -19,13 +16,22 @@ const fetchData = async (url) => {
   throw response;
 };
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}!`);
-});
+const getProjectCards = async (columns_url) => {
+  const projectCards = [];
 
-app.get('/projects/:userName/:repository', async (req, res) => {
-  const { repository, userName } = req.params;
-  const { regex } = req.query;
+  // fetch columns to get card_url
+  const columns = await fetchData(columns_url);
+  for (const { cards_url } of columns) {
+    const cards = await fetchData(cards_url);
+    for (const { note, url } of cards) {
+      projectCards.push(note || url);
+    }
+  }
+
+  return projectCards;
+};
+
+const getCardsByProject = async (repository, userName, regex) => {
   const url = `${BASE_URL}/repos/${userName}/${repository}/projects`;
   try {
     // fetch repo to get project data.
@@ -34,27 +40,37 @@ app.get('/projects/:userName/:repository', async (req, res) => {
 
     for (const { name: projectName, columns_url } of projects) {
       if (projectName.match(regex) || !regex) {
-        const projectCards = [];
-
-        // fetch columns to get card_url
-        const columns = await fetchData(columns_url);
-        for (const { cards_url } of columns) {
-          const cards = await fetchData(cards_url);
-          for (const { note, url } of cards) {
-            projectCards.push(note || url);
-          }
-        }
-        if (projectCards.length) {
-          cardsByProject[projectName] = [...projectCards];
-        } else {
-          cardsByProject[projectName] = 'No cards found';
-        }
+        const projectCards = await getProjectCards(columns_url);
+        cardsByProject[projectName] = [...projectCards];
       }
     }
-    res.send(cardsByProject);
+    return cardsByProject;
   } catch (error) {
-    res.send(`${error.status} - ${error.statusText}`);
+    throw `${error.status} - ${error.statusText}`;
   }
-});
+};
 
-export default app;
+const [, , repo, userName, regex] = process.argv;
+console.log('Using the following parameters to make the request');
+console.table([{ repo, userName, regex }]);
+
+if (repo && userName) {
+  getCardsByProject(repo, userName, regex)
+    .then((res) => {
+      Object.keys(res).forEach((key) => {
+        console.log(`Tickets for ${key} project\n`);
+        const cards = res[key];
+        if (cards?.length) {
+          cards.forEach((value, index) => {
+            console.log(`${index + 1} - ${value}`);
+          });
+        } else {
+          console.log('Any card was found');
+        }
+        console.log('-------------------\n');
+      });
+    })
+    .catch((err) => console.error(err));
+} else {
+  console.log('Repository and user names are mandatory');
+}
