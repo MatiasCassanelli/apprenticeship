@@ -39,13 +39,32 @@
   margin-right: auto;
 }
 
+.flex{
+  display: flex;
+}
+
 .table{
   display: table;
 }
 
-.px-6{
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+.w-full{
+  width: 100%;
+}
+
+.list-outside{
+  list-style-position: outside;
+}
+
+.list-decimal{
+  list-style-type: decimal;
+}
+
+.flex-col{
+  flex-direction: column;
+}
+
+.gap-4{
+  gap: 1rem;
 }
 
 .px-4{
@@ -78,4 +97,14 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+@media (min-width: 640px){
+  .sm\:w-1\/2{
+    width: 50%;
+  }
+
+  .sm\:flex-row{
+    flex-direction: row;
+  }
 }
