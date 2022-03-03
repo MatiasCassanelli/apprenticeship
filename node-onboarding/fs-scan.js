@@ -17,11 +17,10 @@ const filesByExtension = (extension, dir, files = []) => {
   return files;
 };
 
-
 const files = filesByExtension(process.argv[2], __dirname);
 
 if (files.length) {
-  files.forEach(file => {
+  files.forEach((file) => {
     console.log(file);
   });
 } else {
