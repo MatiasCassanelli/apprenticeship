@@ -4226,14 +4226,25 @@ body {
   padding: 0 40px;
 }
 
-.nav-bar > a {
+.nav-item {
   text-decoration: none;
   color: #fff;
   font-weight: 400;
 }
 
-.movy {
+.logo {
   flex-grow: 2;
+  font-size: 30px;
+}
+
+.oval {
+  background-color: #0578ff;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: -1px;
+  left: 60px;
 }
 
 .login-form {
