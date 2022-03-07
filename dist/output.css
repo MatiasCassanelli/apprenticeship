@@ -4036,13 +4036,13 @@ textarea.form-control.is-invalid {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-
-.bg-transparent {
-  background-color: transparent;
 }
 
 .bg-contain {
@@ -4065,12 +4065,12 @@ textarea.form-control.is-invalid {
   padding: 1.5rem;
 }
 
-.p-4 {
-  padding: 1rem;
-}
-
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-5 {
@@ -4118,14 +4118,14 @@ textarea.form-control.is-invalid {
   padding-bottom: 0.5rem;
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .px-9 {
   padding-left: 2.25rem;
   padding-right: 2.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .text-center {
@@ -4160,6 +4160,11 @@ textarea.form-control.is-invalid {
   line-height: 2rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -4170,11 +4175,6 @@ textarea.form-control.is-invalid {
   line-height: 1rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .font-medium {
   font-weight: 500;
 }
@@ -4183,12 +4183,12 @@ textarea.form-control.is-invalid {
   font-weight: 400;
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
 .font-light {
   font-weight: 300;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .uppercase {
@@ -4286,7 +4286,7 @@ body {
 }
 
 .background {
-  background-image: url('/html-css-onboarding/assets/images/background.jpeg');
+  background-image: url('/html-css-onboarding/movy-project/assets/images/background.jpeg');
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -4465,7 +4465,7 @@ body {
 }
 
 .select-wrapper::after {
-  content: url(/html-css-onboarding/assets/images/arrow-down.png);
+  content: url('/html-css-onboarding/movy-project/assets/images/arrow-down.png');
   top: 50%;
   right: 21px;
   position: absolute;
@@ -4571,14 +4571,14 @@ body {
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-red-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-red-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .hover\:text-gray-300:hover {

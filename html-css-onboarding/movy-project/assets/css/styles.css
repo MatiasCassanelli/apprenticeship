@@ -19,7 +19,7 @@ body {
 }
 
 .background {
-  background-image: url('/html-css-onboarding/assets/images/background.jpeg');
+  background-image: url('/html-css-onboarding/movy-project/assets/images/background.jpeg');
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -195,7 +195,7 @@ body {
 }
 
 .select-wrapper::after {
-  content: url(/html-css-onboarding/assets/images/arrow-down.png);
+  content: url('/html-css-onboarding/movy-project/assets/images/arrow-down.png');
   top: 50%;
   right: 21px;
   position: absolute;
