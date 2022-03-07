@@ -12,6 +12,7 @@
     "no-console": "off",
     "no-use-before-define": "error",
     "spaced-comment": "warn",
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "eol-last": "error"
   }
 }

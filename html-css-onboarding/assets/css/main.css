@@ -16,7 +16,3 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
-#date {
-  font-family: sans-serif;
-}

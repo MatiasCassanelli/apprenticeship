@@ -1,0 +1,134 @@
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/forms';
+
+html,
+body {
+  font-family: sans-serif;
+  color: #fff;
+  font-size: 16px;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  background-color: #000000;
+}
+
+.background {
+  background-image: url('/html-css-onboarding/assets/images/background.jpeg');
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100px;
+  padding: 0 40px 0 103px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+}
+
+.logo {
+  flex-grow: 2;
+  font-size: 30px;
+  position: relative;
+}
+
+.oval {
+  background-color: #0578ff;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: -1px;
+  left: 60px;
+}
+
+.login-form {
+  width: 440px;
+  min-height: 477px;
+  background: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.81;
+  border-radius: 4px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-check {
+  flex-direction: row;
+  flex: 1 1 50%;
+}
+
+.gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.0001) 6.91%,
+    #000000 68.61%
+  );
+  position: absolute;
+  width: 100%;
+  height: 412px;
+  bottom: 0;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0 140px 60px 140px;
+  box-sizing: border-box;
+}
+
+.footer > h2 {
+  margin-bottom: 52px;
+}
+
+.sections > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  margin: 0 0 18px;
+  flex: 1;
+}
+
+@media (max-width: 727px), (max-height: 860px) {
+  .login-form {
+    width: 320px;
+  }
+
+  .footer {
+    position: relative;
+    padding: 0 30px;
+  }
+  .footer > h2 {
+    margin-top: 0;
+  }
+
+  .sections > div {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .item {
+    flex: 1 1 50%;
+  }
+
+  .nav-bar {
+    padding-left: 26px;
+  }
+}
