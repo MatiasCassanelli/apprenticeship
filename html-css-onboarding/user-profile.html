@@ -7,7 +7,7 @@
     <link href="/dist/output.css" rel="stylesheet" />
     <title>User Profile</title>
   </head>
-  <body>
+  <body id="user-profile">
     <div>
       <nav class="nav-bar">
         <div class="logo">
@@ -48,23 +48,35 @@
               <label for="language" class="block mb-2 text-xl w-fit"
                 >Language:</label
               >
-              <select id="language" class="p-2 text-xl input w-full" required>
-                <option value="Futbol">Futbol</option>
-                <option value="Basket">Basket</option>
-                <option value="Tenis">Tenis</option>
-                <option value="Rugby">Rugby</option>
-              </select>
+              <div class="select-wrapper">
+                <select
+                  id="language"
+                  class="p-2 text-xl input w-full custom-select"
+                  required
+                >
+                  <option value="Futbol">Option 1</option>
+                  <option value="Basket">Option 2</option>
+                  <option value="Tenis">Option 3</option>
+                  <option value="Rugby">Option 4</option>
+                </select>
+              </div>
             </div>
             <div class="mb-6 w-fit">
               <label for="language" class="block mb-2 text-xl w-fit"
                 >Allowed TV shows and movies:</label
               >
-              <select id="language" class="p-2 text-xl input w-full" required>
-                <option value="Futbol">Futbol</option>
-                <option value="Basket">Basket</option>
-                <option value="Tenis">Tenis</option>
-                <option value="Rugby">Rugby</option>
-              </select>
+              <div class="select-wrapper">
+                <select
+                  id="language"
+                  class="p-2 text-xl input w-full custom-select"
+                  required
+                >
+                  <option value="Futbol">Option A</option>
+                  <option value="Basket">Option B</option>
+                  <option value="Tenis">Option C</option>
+                  <option value="Rugby">Option D</option>
+                </select>
+              </div>
             </div>
           </form>
         </div>
