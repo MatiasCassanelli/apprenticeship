@@ -148,13 +148,15 @@ body {
 
 .edition-form {
   flex: 1;
-  /* min-width: 350px; */
-  /* max-width: 713px; */
 }
 
 .first-line {
   display: flex;
   margin-bottom: 18px;
+}
+
+.first-line > div {
+  margin-left: 18px;
 }
 
 .input {
@@ -168,13 +170,28 @@ body {
 
 .border-button {
   border: 1px solid #0578ff;
-  margin-left: 18px;
 }
 #cancel-button {
   width: 166px;
 }
 #delete-button {
   width: 273px;
+}
+
+@media (min-width: 728px) and (max-width: 1100px) {
+  .edition-container {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .first-line {
+    flex-wrap: wrap;
+  }
+
+  .first-line > div {
+    margin-left: 0;
+    margin-top: 18px;
+  }
 }
 
 @media (max-width: 727px), (max-height: 860px) {
@@ -218,11 +235,11 @@ body {
   }
 
   .first-line {
-    display: block;
-    margin-left: 0;
+    flex-wrap: wrap;
   }
-  .first-line > input[type='text'] {
-    margin-bottom: 18px;
+  .first-line > div {
+    margin-left: 0;
+    margin-top: 18px;
   }
 
   .buttons {
