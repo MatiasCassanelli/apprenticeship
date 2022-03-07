@@ -3829,6 +3829,10 @@ textarea.form-control.is-invalid {
   margin-bottom: 0.5rem;
 }
 
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
+
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -4223,7 +4227,7 @@ body {
   align-items: center;
   box-sizing: border-box;
   height: 100px;
-  padding: 0 40px;
+  padding: 0 40px 0 103px;
 }
 
 .nav-item {
@@ -4235,6 +4239,7 @@ body {
 .logo {
   flex-grow: 2;
   font-size: 30px;
+  position: relative;
 }
 
 .oval {
@@ -4256,10 +4261,6 @@ body {
   border-radius: 4px;
   margin: auto;
   box-sizing: border-box;
-  /* position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
 }
 
 .form-group {
@@ -4328,6 +4329,10 @@ body {
 
   .item {
     flex: 1 1 50%;
+  }
+
+  .nav-bar {
+    padding-left: 26px;
   }
 }
 
