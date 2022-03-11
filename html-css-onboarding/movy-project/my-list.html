@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="/node_modules/tw-elements/dist/js/index.min.js"></script>
+    <title>My List</title>
+  </head>
+  <body class="my-list">
+    <nav
+      class="nav-bar relative w-full flex flex-wrap items-center justify-between py-3 text-gray-200 navbar navbar-expand-lg"
+    >
+      <div
+        class="container-fluid w-full flex flex-wrap items-center justify-between"
+      >
+        <button
+          class="navbar-toggler text-gray-200 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse-menu"
+          aria-controls="collapse-menu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="bars"
+            class="w-6"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path
+              fill="currentColor"
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+            ></path>
+          </svg>
+        </button>
+        <div class="logo order-1">
+          <div class="oval"></div>
+          <a href="#" class="nav-item movy">Movy</a>
+        </div>
+        <div
+          class="collapse navbar-collapse flex-grow items-center order-3 lg:oder-2"
+          id="collapse-menu"
+        >
+          <ul
+            class="navbar-nav flex flex-col pl-0 list-style-none my-0 mr-auto pt-1.5 gap-4"
+          >
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white opacity-80 hover:opacity-90 focus:opacity-90 p-0"
+                href="#"
+                >Movies</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white opacity-80 hover:opacity-90 focus:opacity-90 p-0"
+                href="#"
+                >Series</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white opacity-80 hover:opacity-90 focus:opacity-90 p-0"
+                href="#"
+                >Recently Added</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white opacity-80 hover:opacity-90 focus:opacity-90 p-0"
+                href="#"
+                >My List</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="profile-menu order-2 lg:order-3">
+          <img
+            id="search"
+            src="/html-css-onboarding/movy-project/assets/images/search.png"
+            alt=""
+          />
+          <img
+            id="profile"
+            src="/html-css-onboarding/movy-project/assets/images/profile-image.png"
+            alt=""
+            class="border border-solid border-[#0578FF] rounded-full"
+          />
+          <img
+            id="arrow"
+            src="/html-css-onboarding/movy-project/assets/images/arrow-down-filled.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </nav>
+    <div class="my-list-container">
+      <h2 class="font-medium leading-tight text-2xl content">My List</h2>
+      <div class="films">
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie02.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie01.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie03.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie01.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie03.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie02.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="h-[192px] flex items-center">
+          <div class="film-details">
+            <div class="details w-full">
+              <div class="flex">
+                <div class="flex flex-1 items-center">
+                  <img
+                    src="./assets/images/mark.png"
+                    class="w-[14px] h-[18px] mr-3"
+                    alt=""
+                  />
+                  <img
+                    src="./assets/images/share.png"
+                    class="w-[14.5px] h-[15px]"
+                    alt=""
+                  />
+                </div>
+
+                <div
+                  class="rating rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] leading-[10px] opacity-[0.51]"
+                >
+                  PG-13
+                </div>
+              </div>
+              <p class="text-xl mt-[48px] mb-[12px]">Aladdin</p>
+              <div class="flex">
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star.png"
+                  alt=""
+                />
+                <img
+                  class="w-[11px] h-2.5"
+                  src="./assets/images/round-star_half.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex w-full justify-between items-center mt-[15px]">
+                <p class="text-[10px] leading-[12px]">
+                  Kids • Fantasy Movie • Action
+                </p>
+                <img src="./assets/images/play.png" alt="" />
+              </div>
+            </div>
+            <img
+              class="film-pic"
+              src="/html-css-onboarding/movy-project/assets/images/movie03.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
