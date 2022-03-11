@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="/node_modules/tw-elements/dist/js/index.min.js"></script>
+    <title>User Profile</title>
+  </head>
+  <body id="user-profile">
+    <div>
+      <nav class="nav-bar">
+        <div class="logo">
+          <div class="oval"></div>
+          <a href="#" class="nav-item movy">Movy</a>
+        </div>
+      </nav>
+      <div class="edition-container">
+        <h2 class="title font-medium leading-tight text-4xl content">
+          Edit Profile
+        </h2>
+        <div class="separator"></div>
+        <div class="edition">
+          <div class="image">
+            <img
+              src="/html-css-onboarding/movy-project/assets/images/profile.png"
+              alt=""
+            />
+          </div>
+          <form action="" class="edition-form">
+            <div class="first-line">
+              <input
+                type="text"
+                id="name"
+                class="p-2 w-full text-xl font-medium input leading-none"
+                required
+                placeholder="Your name"
+              />
+              <div class="flex self-center flex-1 items-end">
+                <input
+                  type="checkbox"
+                  class="input text-xl form-check-input appearance-none h-6 w-6 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  id="kid"
+                />
+                <label
+                  class="form-check-label inline-block text-xl font-light"
+                  for="kid"
+                  >Kid?</label
+                >
+              </div>
+            </div>
+            <div class="mb-6 w-fit">
+              <label for="language" class="block mb-2 text-xl w-fit"
+                >Language:</label
+              >
+              <div class="select-wrapper">
+                <select
+                  id="language"
+                  class="p-2 text-xl input w-full custom-select"
+                  required
+                >
+                  <option value="Futbol">Option 1</option>
+                  <option value="Basket">Option 2</option>
+                  <option value="Tenis">Option 3</option>
+                  <option value="Rugby">Option 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-6 w-fit">
+              <label for="language" class="block mb-2 text-xl w-fit"
+                >Allowed TV shows and movies:</label
+              >
+              <div class="select-wrapper">
+                <select
+                  id="language"
+                  class="p-2 text-xl input w-full custom-select"
+                  required
+                >
+                  <option value="Futbol">Option A</option>
+                  <option value="Basket">Option B</option>
+                  <option value="Tenis">Option C</option>
+                  <option value="Rugby">Option D</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="separator mt-10"></div>
+        <div class="flex buttons gap-4">
+          <div class="flex gap-4">
+            <button
+              class="px-9 h-10 mb-6 bg-blue-600 uppercase text-white text-sm font-normal leading-tight rounded-sm shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out border-none"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              id="cancel-button"
+              class="border-button inline-block px-6 h-10 text-white font-normal text-sm leading-tight uppercase rounded-sm bg-transparent hover:bg-gray-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            >
+              Cancel
+            </button>
+          </div>
+
+          <button
+            type="button"
+            id="delete-button"
+            class="border-button inline-block px-6 h-10 text-white font-normal text-sm leading-tight uppercase rounded-sm bg-transparent hover:bg-gray-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          >
+            Delete profile
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
