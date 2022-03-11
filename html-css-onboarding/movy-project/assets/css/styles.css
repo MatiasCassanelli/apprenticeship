@@ -238,6 +238,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin: auto;
 }
 
 .film-pic {
@@ -354,5 +355,37 @@ body {
 
   .films {
     justify-content: center;
+  }
+}
+
+/* GRID RESPONSIVE MEDIA QUERY */
+@media (min-width: 500px) {
+  .films {
+    width: 349px;
+  }
+}
+@media (min-width: 771px) {
+  .films {
+    width: 612px;
+  }
+}
+@media (min-width: 1035px) {
+  .films {
+    width: 875px;
+  }
+}
+@media (min-width: 1278px) {
+  .films {
+    width: 1138px;
+  }
+}
+@media (min-width: 1541px) {
+  .films {
+    width: 1401px;
+  }
+}
+@media (min-width: 1804px) {
+  .films {
+    width: 1664px;
   }
 }
