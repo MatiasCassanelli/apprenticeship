@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import 'tw-elements';
-import './navBar.css';
+import './navBar.scss';
 
 const NavBar = () => (
   <nav className="nav-bar relative w-full flex flex-wrap items-center justify-between py-3 text-gray-200 navbar navbar-expand-lg">
