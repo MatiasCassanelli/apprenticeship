@@ -2,9 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import './Slide.scss';
 
-const Slide = ({ imageSrc, title, onClick }) => (
-  <div className="h-[303px] flex items-center" onClick={onClick}>
-    <div className="film-details w-[270px] h-[150px] md:w-[301px] md:h-[165px] hover:w-[320px] hover:h-[180px] md:hover:w-[553px] md:hover:h-[303px]">
+const Slide = ({ imageSrc, title, onClick, genres }) => (
   <div className="h-[180px] lg:h-[303px] flex items-center" onClick={onClick}>
     <div className="film-details w-[270px] h-[150px] lg:w-[301px] lg:h-[165px] hover:w-[320px] hover:h-[180px] lg:hover:w-[553px] lg:hover:h-[303px]">
       <div className="details w-full">
@@ -56,6 +54,18 @@ const Slide = ({ imageSrc, title, onClick }) => (
             alt=""
           />
         </div>
+        <div className="flex w-full items-center mt-[15px]">
+          {genres.map((genre, index) => (
+            <div
+              key={genre}
+              className="text-[10px] lg:text-[21px] leading-[15px] lg:leading-[25px] flex items-center"
+            >
+              {genre}
+              {index !== genres.length - 1 && (
+                <div className="rounded-full w-1 lg:w-2 h-1 lg:h-2 mx-2 lg:mx-4 bg-white" />
+              )}
+            </div>
+          ))}
           <img
             src="/images/play.png"
             className="ml-auto w-[26px] h-[26px] lg:w-[47px] lg:h-[47px]"
@@ -74,10 +84,12 @@ Slide.propTypes = {
   imageSrc: T.string,
   title: T.string,
   onClick: T.func,
+  genres: T.arrayOf(T.string),
 };
 
 Slide.defaultProps = {
   imageSrc: '',
   title: '',
   onClick: () => {},
+  genres: [],
 };

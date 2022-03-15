@@ -2,14 +2,46 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/popular';
 
-const getPopularMovies = async () => {
+const populateGenres = (movies, genres) =>
+  movies.map((movie) => {
+    const populatedGenres = movie.genre_ids.map((id) => {
+      const genre = genres.find((g) => id === g.id);
+      return genre?.name;
+    });
+    return {
+      ...movie,
+      genres: populatedGenres,
+    };
+  });
+const getMovies = async (url) => {
   try {
-    const response = await axios.get(BASE_URL, {
+    const moviePromise = axios.get(url, {
       params: {
         api_key: process.env.REACT_APP_FILM_DB_API_KEY,
       },
     });
-    return response?.data;
+    const genrePromise = axios.get(`${BASE_URL}/genre/movie/list`, {
+      params: {
+        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+      },
+    });
+    const responses = await Promise.allSettled([moviePromise, genrePromise]);
+    const [movieResponse, genreResponse] = responses;
+    const movies = movieResponse?.value?.data.results;
+    const genres = genreResponse?.value?.data.genres;
+    return { movies, genres, ok: true };
+  } catch (error) {
+    return error;
+  }
+};
+
+const getPopularMovies = async () => {
+  try {
+    const data = await getMovies(`${BASE_URL}/movie/popular`);
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
   } catch (error) {
     return error;
   }

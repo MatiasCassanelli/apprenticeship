@@ -86,10 +86,14 @@ const Carousel = ({ slides, title }) => {
           className="relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px]"
         >
           {slides.map((slide) => (
-            <div key={slide.id} className="snap-always relative snap-center md:snap-start">
+            <div
+              key={slide.id}
+              className="snap-always relative snap-center md:snap-start"
+            >
               <Slide
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
+                genres={slide.genres}
               />
             </div>
           ))}
