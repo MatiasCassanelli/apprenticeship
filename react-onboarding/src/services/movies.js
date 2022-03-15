@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.themoviedb.org/3/movie/popular';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 const populateGenres = (movies, genres) =>
   movies.map((movie) => {
@@ -13,6 +13,7 @@ const populateGenres = (movies, genres) =>
       genres: populatedGenres,
     };
   });
+
 const getMovies = async (url) => {
   try {
     const moviePromise = axios.get(url, {
@@ -47,4 +48,40 @@ const getPopularMovies = async () => {
   }
 };
 
-export default getPopularMovies;
+const getTopRated = async () => {
+  try {
+    const data = await getMovies(`${BASE_URL}/movie/top_rated`);
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getNowPlaying = async () => {
+  try {
+    const data = await getMovies(`${BASE_URL}/movie/now_playing`);
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getUpcoming = async () => {
+  try {
+    const data = await getMovies(`${BASE_URL}/movie/upcoming`);
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export { getPopularMovies, getTopRated, getNowPlaying, getUpcoming };
