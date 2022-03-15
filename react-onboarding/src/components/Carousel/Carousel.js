@@ -50,8 +50,8 @@ const Carousel = ({ slides, title }) => {
   }, []);
 
   return (
-    <div className="carousel my-12 mx-auto">
-      <h2 className="text-[28px] leading-8 font-bold mb-4 text-white">
+    <div className="carousel mx-auto my-6 lg:my-1.5 relative">
+      <h2 className="text-[24px] lg:text-[28px] leading-8 font-bold lg:mb-4 text-white lg:absolute">
         {title}
       </h2>
       <div className="relative overflow-hidden">
@@ -86,7 +86,7 @@ const Carousel = ({ slides, title }) => {
           className="relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px]"
         >
           {slides.map((slide) => (
-            <div key={slide.id} className="snap-always relative snap-start">
+            <div key={slide.id} className="snap-always relative snap-center md:snap-start">
               <Slide
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
