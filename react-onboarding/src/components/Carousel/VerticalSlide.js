@@ -1,12 +1,14 @@
 import React from 'react';
 import T from 'prop-types';
-import './Slide.scss';
+import styles from './slide.module.scss';
 
 const VerticalSlide = ({ imageSrc, title, onClick }) => (
   <div className="h-[560px] lg:h-[625px] flex items-center" onClick={onClick}>
-    <div className="film-details w-[250px] h-[430px] lg:w-[275px] lg:h-[473px] hover:w-[330px] hover:h-[560px] lg:hover:w-[363px] lg:hover:h-[625px]">
-      <div className="mask" />
-      <div className="details w-full">
+    <div
+      className={`${styles['film-details']} w-[250px] h-[430px] lg:w-[275px] lg:h-[473px] hover:w-[330px] hover:h-[560px] lg:hover:w-[363px] lg:hover:h-[625px]`}
+    >
+      <div className={`${styles.mask}`} />
+      <div className={`${styles.details} w-full`}>
         <img
           src="/images/outline-play.png"
           className="ml-auto w-[140px] h-[140px] lg:w-[152px] lg:h-[152px] play-icon"
