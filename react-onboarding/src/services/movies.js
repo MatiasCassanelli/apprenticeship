@@ -84,4 +84,50 @@ const getUpcoming = async () => {
   }
 };
 
-export { getPopularMovies, getTopRated, getNowPlaying, getUpcoming };
+const getLatest = async () => {
+  try {
+    const moviePromise = axios.get(`${BASE_URL}/movie/latest`, {
+      params: {
+        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+      },
+    });
+    const genrePromise = axios.get(`${BASE_URL}/genre/movie/list`, {
+      params: {
+        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+      },
+    });
+    const responses = await Promise.allSettled([moviePromise, genrePromise]);
+    const [movieResponse, genreResponse] = responses;
+    const movie = movieResponse?.value?.data;
+    const genres = genreResponse?.value?.data.genres;
+    const populatedGenres = movie.genre_ids?.map((id) => {
+      const genre = genres.find((g) => id === g.id);
+      return genre?.name;
+    });
+    return {
+      ...movie,
+      genres: populatedGenres,
+    };
+  } catch (error) {
+    return error;
+  }
+  // try {
+  //   const data = await getMovies(`${BASE_URL}/movie/latest`);
+  //   if (data.ok) {
+  //     const { movie, genres } = data;
+  //     const populatedGenres = movie.genre_ids.map((id) => {
+  //       const genre = genres.find((g) => id === g.id);
+  //       return genre?.name;
+  //     });
+  //     return {
+  //       ...movie,
+  //       genres: populatedGenres,
+  //     };
+  //   }
+  //   return data;
+  // } catch (error) {
+  //   return error;
+  // }
+};
+
+export { getPopularMovies, getTopRated, getNowPlaying, getUpcoming, getLatest };

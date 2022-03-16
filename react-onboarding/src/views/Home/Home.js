@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import NavBar from '../../components/NavBar/NavBar';
 import Carousel from '../../components/Carousel/Carousel';
+import Hero from '../../components/Hero/Hero';
 import {
   getTopRated,
   getPopularMovies,
   getNowPlaying,
   getUpcoming,
+  getLatest,
 } from '../../services/movies';
 
 const Home = () => {
@@ -14,6 +16,7 @@ const Home = () => {
   const [topRatedFilms, setTopRatedFilms] = useState();
   const [nowPlayingFilms, setNowPlayingFilms] = useState();
   const [upcomingFilms, setUpcomingFilms] = useState();
+  const [latestFilm, setLatestFilm] = useState();
   useEffect(() => {
     getPopularMovies().then((res) => {
       setPopularFilms(res);
@@ -27,17 +30,19 @@ const Home = () => {
     getUpcoming().then((res) => {
       setUpcomingFilms(res);
     });
+    getLatest().then((res) => {
+      setLatestFilm(res);
+    });
   }, []);
 
   return (
     <div className="relative">
       <NavBar />
+      {latestFilm && <Hero movie={latestFilm} />}
       <div className="py-3 pl-4 md:pl-[63px]">
-        {/* {popularFilms?.length && <Carousel slides={popularFilms} title="My List" />} */}
         {popularFilms?.length && (
           <Carousel slides={popularFilms} title="Popular on Movy" />
         )}
-        {/* {popularFilms?.length && <Carousel slides={popularFilms} title="Continue Watching for John" />} */}
         {topRatedFilms?.length && (
           <Carousel
             slides={topRatedFilms}
