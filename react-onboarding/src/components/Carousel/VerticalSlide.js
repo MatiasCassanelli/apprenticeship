@@ -22,7 +22,7 @@ const VerticalSlide = ({ imageSrc, title, onClick }) => (
             <p className="text-2xl lg:text-[44px] lg:leading-[53px] my-0 flex-1">
               {title}
             </p>
-            <div className="flex">
+            <div className="flex items-center">
               <img className="w-3 h-3" src="/images/round-star.png" alt="" />
               <img className="w-3 h-3" src="/images/round-star.png" alt="" />
               <img className="w-3 h-3" src="/images/round-star.png" alt="" />

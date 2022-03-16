@@ -4,7 +4,7 @@ import 'tw-elements';
 import './navBar.scss';
 
 const NavBar = () => (
-  <nav className="nav-bar absolute w-full flex flex-wrap items-center justify-between py-3 text-gray-200 navbar navbar-expand-lg bg-black/20">
+  <nav className="nav-bar absolute w-full flex flex-wrap items-center justify-between py-3 text-gray-200 navbar navbar-expand-lg">
     <div className="container-fluid w-full flex flex-wrap items-center justify-between">
       <button
         className="navbar-toggler text-gray-200 border-0 hover:shadow-none hover:no-underline py-2 px-2.5 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"

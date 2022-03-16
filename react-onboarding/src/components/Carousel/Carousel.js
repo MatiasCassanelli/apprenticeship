@@ -52,7 +52,7 @@ const Carousel = ({ slides, title, type }) => {
   }, []);
 
   return (
-    <div className="carousel mx-auto my-6 lg:my-1.5 relative">
+    <div className="carousel mx-auto mb-6 lg:my-1.5 relative">
       <h2 className="text-[24px] lg:text-[28px] leading-8 font-bold lg:mb-4 text-white lg:absolute">
         {title}
       </h2>
