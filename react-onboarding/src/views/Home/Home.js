@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Footer from '../../components/Footer/Footer';
+import NavBar from '../../components/NavBar/NavBar';
 import Carousel from '../../components/Carousel/Carousel';
 import {
   getTopRated,
@@ -28,7 +30,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="relative">
+      <NavBar />
       <div className="py-3 pl-4 md:pl-[63px]">
         {/* {popularFilms?.length && <Carousel slides={popularFilms} title="My List" />} */}
         {popularFilms?.length && (
@@ -49,6 +52,7 @@ const Home = () => {
           <Carousel slides={upcomingFilms} title="Recommended movies" />
         )}
       </div>
+      <Footer />
     </div>
   );
 };
