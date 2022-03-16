@@ -24,5 +24,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'eol-last': 'error',
   },
 };
