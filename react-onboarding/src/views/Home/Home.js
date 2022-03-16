@@ -36,7 +36,11 @@ const Home = () => {
         )}
         {/* {popularFilms?.length && <Carousel slides={popularFilms} title="Continue Watching for John" />} */}
         {topRatedFilms?.length && (
-          <Carousel slides={topRatedFilms} title="Most Viewed" />
+          <Carousel
+            slides={topRatedFilms}
+            title="Most Viewed"
+            type="vertical"
+          />
         )}
         {nowPlayingFilms?.length && (
           <Carousel slides={nowPlayingFilms} title="Recommended movies" />

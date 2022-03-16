@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import T from 'prop-types';
 import Slide from './Slide';
+import VerticalSlide from './VerticalSlide';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 const SLIDE_WIDTH = 263;
 
-const Carousel = ({ slides, title }) => {
+const Carousel = ({ slides, title, type }) => {
+  const SlideComponent = type === 'horizontal' ? Slide : VerticalSlide;
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef(null);
@@ -90,7 +92,7 @@ const Carousel = ({ slides, title }) => {
               key={slide.id}
               className="snap-always relative snap-center md:snap-start"
             >
-              <Slide
+              <SlideComponent
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
@@ -112,9 +114,11 @@ Carousel.propTypes = {
       poster_path: T.string,
     }),
   ),
+  type: T.string,
 };
 
 Carousel.defaultProps = {
   slides: [],
   title: T.string,
+  type: 'horizontal',
 };

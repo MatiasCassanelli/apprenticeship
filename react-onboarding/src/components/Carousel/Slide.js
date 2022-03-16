@@ -5,7 +5,7 @@ import './Slide.scss';
 const Slide = ({ imageSrc, title, onClick, genres }) => (
   <div className="h-[180px] lg:h-[303px] flex items-center" onClick={onClick}>
     <div className="film-details w-[270px] h-[150px] lg:w-[301px] lg:h-[165px] hover:w-[320px] hover:h-[180px] lg:hover:w-[553px] lg:hover:h-[303px]">
-      <div className="details w-full">
+      <div className="details darker-background w-full">
         <div className="flex">
           <div className="flex flex-1 items-center">
             <img
