@@ -1,0 +1,46 @@
+.film-details {
+  transition: 0.2s;
+  position: relative;
+}
+
+.details {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.film-details:hover {
+  .details {
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    padding: 15px 18px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+  }
+
+  .darker-background {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .mask {
+    background: linear-gradient(
+      180deg,
+      rgba(12, 176, 255, 0.0001) 3.34%,
+      #0578ff 100%
+    );
+    height: 66%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

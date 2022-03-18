@@ -1,0 +1,99 @@
+#user-profile {
+  background-color: #161616;
+}
+
+.nav-bar {
+  box-sizing: border-box;
+  display: flex;
+  padding: 30px 40px 30px 103px;
+  align-items: center;
+  z-index: 2;
+}
+
+.nav-item a {
+  text-decoration: none;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 400;
+  display: block;
+}
+
+.logo {
+  font-size: 30px;
+  position: relative;
+  margin-right: 78px;
+}
+
+.oval {
+  background-color: #0578ff;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: -1px;
+  left: 60px;
+}
+
+.profile-menu {
+  display: flex;
+  align-items: center;
+}
+.profile-menu #search {
+  width: 17px;
+  height: 17px;
+  margin-right: 13px;
+}
+.profile-menu #profile {
+  width: 28px;
+  height: 28px;
+  margin-right: 20px;
+}
+.profile-menu #arrow {
+  width: 8px;
+  height: 5px;
+}
+
+@media (max-width: 727px), (max-height: 860px) {
+  .item {
+    flex: 1 1 50%;
+  }
+
+  .nav-bar {
+    padding-left: 26px;
+  }
+}
+
+/* GRID RESPONSIVE MEDIA QUERY */
+@media (min-width: 500px) {
+  .films {
+    width: 349px;
+  }
+}
+@media (min-width: 771px) {
+  .films {
+    width: 612px;
+  }
+}
+@media (min-width: 1035px) {
+  .films {
+    width: 875px;
+  }
+}
+@media (min-width: 1278px) {
+  .films {
+    width: 1138px;
+  }
+}
+@media (min-width: 1541px) {
+  .films {
+    width: 1401px;
+  }
+}
+@media (min-width: 1804px) {
+  .films {
+    width: 1664px;
+  }
+}

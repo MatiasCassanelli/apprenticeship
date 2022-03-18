@@ -19,5 +19,15 @@
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  }
 }
