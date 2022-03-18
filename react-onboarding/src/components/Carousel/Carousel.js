@@ -2,15 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import T from 'prop-types';
 import Slide from './Slide';
 import VerticalSlide from './VerticalSlide';
+import Recommendation from '../Recommendation/Recommendation';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 const SLIDE_WIDTH = 263;
 
-const Carousel = ({ slides, title, type }) => {
+const Carousel = ({ slides, title, type, recommendedCarousel }) => {
   const SlideComponent = type === 'horizontal' ? Slide : VerticalSlide;
   const maxScrollWidth = useRef(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedMovie, setSelectedMovie] = useState();
 
   const movePrev = () => {
     if (currentIndex > 0) {
@@ -57,6 +59,7 @@ const Carousel = ({ slides, title, type }) => {
         {title}
       </h2>
       <div className="relative overflow-hidden">
+        {/* Control begins */}
         <div className="flex justify-between absolute top left w-full h-full">
           <button
             type="button"
@@ -83,6 +86,8 @@ const Carousel = ({ slides, title, type }) => {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
+        {/* Control ends */}
+        {/* Carousel begins */}
         <div
           ref={carousel}
           className="relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px]"
@@ -96,11 +101,19 @@ const Carousel = ({ slides, title, type }) => {
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
+                onClick={() => setSelectedMovie(slide)}
               />
             </div>
           ))}
         </div>
       </div>
+      {/* Carousel ends */}
+      {recommendedCarousel && selectedMovie && (
+        <Recommendation
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
+      )}
     </div>
   );
 };
@@ -115,10 +128,12 @@ Carousel.propTypes = {
     }),
   ),
   type: T.string,
+  recommendedCarousel: T.bool,
 };
 
 Carousel.defaultProps = {
   slides: [],
   title: T.string,
   type: 'horizontal',
+  recommendedCarousel: false,
 };
