@@ -60,7 +60,7 @@ const Slide = ({ imageSrc, title, onClick, genres }) => (
             alt=""
           />
         </div>
-        <div className="flex w-full items-center mt-[15px]">
+        <div className="flex w-full items-center mt-[15px] truncate">
           {genres.map((genre, index) => (
             <div
               key={genre}

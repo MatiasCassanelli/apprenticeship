@@ -16,7 +16,7 @@ const Recommendation = ({ movie, onClose }) => {
     return null;
   };
   return (
-    <div className="relative h-[760px] mb-[30px]">
+    <div className="relative h-[640px] h-[850px] mb-[30px]">
       <div className={styles.gradient} />
       <img
         src={`${BASE_URL}${movie.poster_path}`}
@@ -25,14 +25,18 @@ const Recommendation = ({ movie, onClose }) => {
       />
       <div
         onClick={onClose}
-        className="absolute top-[22px] right-[36px] z-10 cursor-pointer"
+        className="absolute top-[13px] lg:top-[22px] right-[20px] lg:right-[36px] z-10 lg:cursor-pointer"
       >
-        <img className="w-[22px] h-[22px]" src="/images/close.png" alt="" />
+        <img
+          className="w-[20px] lg:w-[22px] h-[20px] lg:h-[22px]"
+          src="/images/close.png"
+          alt=""
+        />
       </div>
       {getChildComponent()}
-      <div className="absolute bottom-[15px] w-full flex justify-center gap-[59px]">
+      <div className="absolute bottom-[15px] w-full flex justify-center gap-[20px] lg:gap-[59px]">
         <div
-          className="flex items-center flex-col gap-[10px]"
+          className="flex items-center flex-col gap-[10px] cursor-pointer"
           onClick={() => setSelectedSection('overview')}
         >
           <p className="text-[16px]">OVERVIEW</p>
@@ -41,7 +45,7 @@ const Recommendation = ({ movie, onClose }) => {
           )}
         </div>
         <div
-          className="flex items-center flex-col gap-[14px]"
+          className="flex items-center flex-col gap-[10px] cursor-pointer"
           onClick={() => setSelectedSection('moreLikeThis')}
         >
           <p className="text-[16px]">MORE LIKE THIS</p>
@@ -50,7 +54,7 @@ const Recommendation = ({ movie, onClose }) => {
           )}
         </div>
         <div
-          className="flex items-center flex-col gap-[14px]"
+          className="flex items-center flex-col gap-[10px] cursor-pointer"
           onClick={() => setSelectedSection('details')}
         >
           <p className="text-[16px]">DETAILS</p>

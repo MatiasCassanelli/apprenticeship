@@ -2,9 +2,11 @@ import React from 'react';
 import T from 'prop-types';
 
 const Overview = ({ title, overview, genres }) => (
-  <div className="w-full absolute top-0 pt-[95px] pl-[72px]">
-    <p className="text-[40px] leading-[48px] mb-[13px]">A Movy Film</p>
-    <p className="text-[60px] leading-[72px] mb-[19px] w-1/2 line-clamp-2">
+  <div className="w-full absolute top-0 pt-[40px] lg:pt-[95px] px-[20px] lg:pl-[72px] lg:pr-0">
+    <p className="text-xl lg:text-[40px] lg:leading-[48px] mb-[8px] lg:mb-[13px]">
+      A Movy Film
+    </p>
+    <p className="text-4xl lg:text-[60px] lg:leading-[72px] mb-[19px] w-full lg:w-1/2 line-clamp-2">
       {title}
     </p>
     <div className="flex gap-[34px] mb-[32px]">
@@ -39,8 +41,10 @@ const Overview = ({ title, overview, genres }) => (
         PG-13
       </div>
     </div>
-    <p className="line-clamp-4 text-xl mb-[32px] w-1/2">{overview}</p>
-    <div className="flex items-center w-full gap-[42px]">
+    <p className="line-clamp-4 lg:line-clamp-5 text-md lg:text-xl mb-[32px] w-full lg:w-1/2">
+      {overview}
+    </p>
+    <div className="flex items-center w-full flex-col lg:flex-row gap-2 lg:gap-[42px] mb-[32px] lg:mb-[46px]">
       <div className="flex items-center">
         <img
           src="/images/mark-hero.png"
@@ -58,12 +62,9 @@ const Overview = ({ title, overview, genres }) => (
         <p className="text-[18px] text-[#92AAD7]">Share</p>
       </div>
     </div>
-    <div className="flex w-full items-center mt-[46px]">
+    <div className="flex w-full items-center mb-[32px] flex-wrap">
       {genres?.map((genre, index) => (
-        <div
-          key={genre}
-          className="text-[10px] lg:text-[21px] leading-[15px] lg:leading-[25px] flex items-center"
-        >
+        <div key={genre} className="text-md flex items-center">
           {genre}
           {index !== genres.length - 1 && (
             <div className="rounded-full w-1 lg:w-2 h-1 lg:h-2 mx-2 lg:mx-4 bg-white" />
