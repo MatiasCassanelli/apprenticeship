@@ -97,11 +97,22 @@ const Carousel = ({ slides, title, type, recommendedCarousel }) => {
               key={slide.id}
               className="snap-always relative snap-center md:snap-start"
             >
+              {recommendedCarousel && slide === selectedMovie && (
+                <img
+                  src="/images/triangle.png"
+                  alt=""
+                  className="absolute bottom-[48px] left-[50%] -translate-x-[50%]"
+                />
+              )}
               <SlideComponent
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
                 onFocus={() => setSelectedMovie(slide)}
+                shouldAnimateOnHover={!recommendedCarousel}
+                noAnimatedClassName={`${
+                  slide === selectedMovie && 'border-4 border-white box-content'
+                }`}
               />
             </div>
           ))}
