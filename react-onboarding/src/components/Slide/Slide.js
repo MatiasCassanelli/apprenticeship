@@ -2,7 +2,6 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
 
-// eslint-disable-next-line react/prop-types
 const Slide = ({
   imageSrc,
   title,
