@@ -2,11 +2,11 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
 
-const Slide = ({ imageSrc, title, onClick, genres }) => (
+const Slide = ({ imageSrc, title, onFocus, genres }) => (
   <div className="h-[180px] lg:h-[303px] flex items-center">
     <div
-      onMouseOver={onClick}
-      onFocus={onClick}
+      onMouseOver={onFocus}
+      onFocus={onFocus}
       className={`${styles['film-details']} w-[270px] h-[150px] lg:w-[301px] lg:h-[165px] hover:w-[320px] hover:h-[180px] lg:hover:w-[553px] lg:hover:h-[303px]`}
     >
       <div
@@ -89,13 +89,13 @@ export default Slide;
 Slide.propTypes = {
   imageSrc: T.string,
   title: T.string,
-  onClick: T.func,
+  onFocus: T.func,
   genres: T.arrayOf(T.string),
 };
 
 Slide.defaultProps = {
   imageSrc: '',
   title: '',
-  onClick: () => {},
+  onFocus: () => {},
   genres: [],
 };

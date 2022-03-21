@@ -101,7 +101,7 @@ const Carousel = ({ slides, title, type, recommendedCarousel }) => {
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
-                onClick={() => setSelectedMovie(slide)}
+                onFocus={() => setSelectedMovie(slide)}
               />
             </div>
           ))}
