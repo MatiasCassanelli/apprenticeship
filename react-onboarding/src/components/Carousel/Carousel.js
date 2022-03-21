@@ -1,13 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import T from 'prop-types';
-import Slide from './Slide';
-import VerticalSlide from './VerticalSlide';
-import Recommendation from '../Recommendation/Recommendation';
+import Slide from '../Slide/Slide';
+import VerticalSlide from '../Slide/VerticalSlide';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 const SLIDE_WIDTH = 263;
 
-const Carousel = ({ slides, title, type, recommendedCarousel }) => {
+const Carousel = ({
+  slides,
+  title,
+  type,
+  recommendedCarousel,
+  onMovieSelect,
+  resetFocus,
+}) => {
   const SlideComponent = type === 'horizontal' ? Slide : VerticalSlide;
   const maxScrollWidth = useRef(0);
   const carousel = useRef(null);
@@ -40,6 +46,12 @@ const Carousel = ({ slides, title, type, recommendedCarousel }) => {
 
     return false;
   };
+
+  useEffect(() => {
+    if (resetFocus) {
+      setSelectedMovie(null);
+    }
+  }, [resetFocus]);
 
   useEffect(() => {
     if (carousel !== null && carousel.current !== null) {
@@ -108,7 +120,10 @@ const Carousel = ({ slides, title, type, recommendedCarousel }) => {
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
-                onFocus={() => setSelectedMovie(slide)}
+                onFocus={() => {
+                  setSelectedMovie(slide);
+                  onMovieSelect(slide);
+                }}
                 shouldAnimateOnHover={!recommendedCarousel}
                 noAnimatedClassName={`${
                   slide === selectedMovie && 'border-4 border-white box-content'
@@ -119,12 +134,6 @@ const Carousel = ({ slides, title, type, recommendedCarousel }) => {
         </div>
       </div>
       {/* Carousel ends */}
-      {recommendedCarousel && selectedMovie && (
-        <Recommendation
-          movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)}
-        />
-      )}
     </div>
   );
 };
@@ -140,11 +149,15 @@ Carousel.propTypes = {
   ),
   type: T.string,
   recommendedCarousel: T.bool,
+  resetFocus: T.bool,
+  onMovieSelect: T.func,
 };
 
 Carousel.defaultProps = {
   slides: [],
-  title: T.string,
+  title: '',
   type: 'horizontal',
   recommendedCarousel: false,
+  resetFocus: false,
+  onMovieSelect: () => {},
 };
