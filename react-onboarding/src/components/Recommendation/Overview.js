@@ -1,8 +1,10 @@
 import React from 'react';
 import T from 'prop-types';
 
-const Overview = ({ title, overview, genres }) => (
-  <div className="w-full absolute top-0 pt-[40px] lg:pt-[95px] px-[20px] lg:pl-[72px] lg:pr-0">
+const Overview = ({ title, overview, genres, className }) => (
+  <div
+    className={`w-full absolute top-0 pt-[40px] lg:pt-[95px] px-[20px] lg:pl-[72px] lg:pr-0 ${className}`}
+  >
     <p className="text-xl lg:text-[40px] lg:leading-[48px] mb-[8px] lg:mb-[13px]">
       A Movy Film
     </p>
@@ -81,10 +83,12 @@ Overview.propTypes = {
   title: T.string,
   overview: T.string,
   genres: T.arrayOf(T.string),
+  className: T.string,
 };
 
 Overview.defaultProps = {
   title: '',
   overview: '',
   genres: [],
+  className: '',
 };

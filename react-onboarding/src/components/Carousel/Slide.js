@@ -108,6 +108,7 @@ Slide.propTypes = {
   onFocus: T.func,
   genres: T.arrayOf(T.string),
   shouldAnimateOnHover: T.bool,
+  noAnimatedClassName: T.string,
 };
 
 Slide.defaultProps = {
@@ -116,4 +117,5 @@ Slide.defaultProps = {
   onFocus: () => {},
   genres: [],
   shouldAnimateOnHover: true,
+  noAnimatedClassName: '',
 };

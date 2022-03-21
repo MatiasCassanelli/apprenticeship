@@ -13,14 +13,6 @@ const Recommendation = ({ movie, onClose }) => {
     return () => setIsMounted(false);
   }, []);
 
-  const getChildComponent = () => {
-    const { title } = movie;
-    if (selectedSection === 'overview') {
-      const { overview, genres } = movie;
-      return <Overview title={title} overview={overview} genres={genres} />;
-    }
-    return null;
-  };
   return (
     <div className="relative h-[640px] h-[850px] mb-[30px]">
       <div
@@ -47,7 +39,16 @@ const Recommendation = ({ movie, onClose }) => {
             alt=""
           />
         </div>
-        {getChildComponent()}
+        <Overview
+          title={movie.title}
+          overview={movie.overview}
+          genres={movie.genres}
+          className={`${
+            selectedSection === 'overview'
+              ? styles.horizontalShow
+              : styles.horizontalHide
+          }`}
+        />
         <div className="absolute bottom-[15px] w-full flex justify-center gap-[20px] lg:gap-[59px]">
           <div
             className="flex items-center flex-col gap-[10px] cursor-pointer"
