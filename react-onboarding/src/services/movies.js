@@ -115,17 +115,28 @@ const getLatest = async () => {
 
 const getRelatedMovies = async (movieId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/movie/${movieId}/similar`, {
-      params: {
-        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
-      },
-    });
-    return response?.data?.results;
+    const data = await getMovies(`${BASE_URL}/movie/${movieId}/similar`);
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
   } catch (error) {
     return error;
   }
 };
 
+const getCredits = async (movieId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
+      params: {
+        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+      },
+    });
+    return response?.data;
+  } catch (error) {
+    return error;
+  }
+};
 export {
   getPopularMovies,
   getTopRated,
@@ -133,4 +144,5 @@ export {
   getUpcoming,
   getLatest,
   getRelatedMovies,
+  getCredits,
 };

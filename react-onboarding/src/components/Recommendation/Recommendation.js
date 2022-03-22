@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
 import styles from './recommendation.module.scss';
 import Overview from './Overview';
-import { getRelatedMovies } from '../../services/movies';
+import { getRelatedMovies, getCredits } from '../../services/movies';
 import MoreLikeThis from './MoreLikeThis';
+import Details from './Details';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 
 const Recommendation = ({ movie, onClose }) => {
   const [selectedSection, setSelectedSection] = useState('overview');
   const [relatedMovies, setRelatedMovies] = useState([]);
+  const [credits, setCredits] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
@@ -20,6 +22,9 @@ const Recommendation = ({ movie, onClose }) => {
     setSelectedSection('overview');
     getRelatedMovies(movie.id).then((res) => {
       setRelatedMovies(res);
+    });
+    getCredits(movie.id).then((res) => {
+      setCredits(res);
     });
   }, [movie]);
 
@@ -76,7 +81,20 @@ const Recommendation = ({ movie, onClose }) => {
                   : styles.horizontalHide
               }`}
             />
+            <Details
+              title={movie.title}
+              cast={credits?.cast}
+              director={credits?.crew?.find((x) => x.job === 'Director')?.name}
+              genres={movie.genres}
+              className={`${
+                selectedSection === 'details'
+                  ? styles.horizontalShow
+                  : styles.horizontalHide
+              }`}
+            />
+          </div>
         </div>
+
         <div className="absolute bottom-[15px] w-full flex justify-center gap-[20px] lg:gap-[59px]">
           <div
             className="flex items-center flex-col gap-[10px] cursor-pointer"
