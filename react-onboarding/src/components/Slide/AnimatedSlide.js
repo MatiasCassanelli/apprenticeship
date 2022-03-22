@@ -74,7 +74,7 @@ const AnimatedSlide = ({
               alt=""
             />
           </div>
-          <div className="flex w-full items-center mt-[15px] truncate">
+          <div className="flex w-full items-center mt-[15px] truncate flex-wrap">
             {genres.map((genre, index) => (
               <div
                 key={genre}

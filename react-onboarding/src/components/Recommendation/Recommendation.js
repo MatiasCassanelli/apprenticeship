@@ -2,16 +2,26 @@ import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
 import styles from './recommendation.module.scss';
 import Overview from './Overview';
+import { getRelatedMovies } from '../../services/movies';
+import MoreLikeThis from './MoreLikeThis';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 
 const Recommendation = ({ movie, onClose }) => {
   const [selectedSection, setSelectedSection] = useState('overview');
+  const [relatedMovies, setRelatedMovies] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
     return () => setIsMounted(false);
   }, []);
+
+  useEffect(() => {
+    setSelectedSection('overview');
+    getRelatedMovies(movie.id).then((res) => {
+      setRelatedMovies(res);
+    });
+  }, [movie]);
 
   return (
     <div className="relative h-[640px] h-[850px] mb-[30px]">
@@ -45,6 +55,15 @@ const Recommendation = ({ movie, onClose }) => {
           genres={movie.genres}
           className={`${
             selectedSection === 'overview'
+              ? styles.horizontalShow
+              : styles.horizontalHide
+          }`}
+        />
+        <MoreLikeThis
+          title={movie.title}
+          movies={relatedMovies}
+          className={`${
+            selectedSection === 'moreLikeThis'
               ? styles.horizontalShow
               : styles.horizontalHide
           }`}
@@ -92,6 +111,7 @@ Recommendation.propTypes = {
     title: T.string,
     overview: T.string,
     genres: T.arrayOf(T.string),
+    id: T.number,
   }),
   onClose: T.func,
 };

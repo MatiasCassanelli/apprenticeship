@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import T from 'prop-types';
+import AnimatedSlide from '../Slide/AnimatedSlide';
+import VerticalAnimatedSlide from '../Slide/VerticalAnimatedSlide';
 import Slide from '../Slide/Slide';
-import VerticalSlide from '../Slide/VerticalSlide';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 const SLIDE_WIDTH = 263;
@@ -13,8 +14,12 @@ const Carousel = ({
   recommendedCarousel,
   onMovieSelect,
   resetFocus,
+  enableAnimation,
+  className,
 }) => {
-  const SlideComponent = type === 'horizontal' ? Slide : VerticalSlide;
+  let SlideComponent =
+    type === 'horizontal' ? AnimatedSlide : VerticalAnimatedSlide;
+  SlideComponent = enableAnimation ? SlideComponent : Slide;
   const maxScrollWidth = useRef(0);
   const carousel = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -102,7 +107,7 @@ const Carousel = ({
         {/* Carousel begins */}
         <div
           ref={carousel}
-          className="relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px]"
+          className={`relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px] ${className}`}
         >
           {slides.map((slide) => (
             <div
@@ -120,6 +125,7 @@ const Carousel = ({
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
+                overview={slide.overview}
                 onFocus={() => {
                   setSelectedMovie(slide);
                   onMovieSelect(slide);
@@ -150,7 +156,9 @@ Carousel.propTypes = {
   type: T.string,
   recommendedCarousel: T.bool,
   resetFocus: T.bool,
+  enableAnimation: T.bool,
   onMovieSelect: T.func,
+  className: T.string,
 };
 
 Carousel.defaultProps = {
@@ -159,5 +167,7 @@ Carousel.defaultProps = {
   type: 'horizontal',
   recommendedCarousel: false,
   resetFocus: false,
+  enableAnimation: true,
   onMovieSelect: () => {},
+  className: '',
 };
