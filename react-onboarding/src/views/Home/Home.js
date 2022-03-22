@@ -51,7 +51,11 @@ const Home = () => {
           />
         )}
         {nowPlayingFilms?.length && (
-          <Carousel slides={nowPlayingFilms} title="Recommended movies" />
+          <Carousel
+            slides={nowPlayingFilms}
+            title="Recommended movies"
+            recommendedCarousel
+          />
         )}
         {upcomingFilms?.length && (
           <Carousel slides={upcomingFilms} title="Recommended movies" />
