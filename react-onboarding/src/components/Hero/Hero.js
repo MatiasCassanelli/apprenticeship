@@ -2,12 +2,12 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './hero.module.scss';
 
-const BASE_URL = 'https://image.tmdb.org/t/p/w300';
+const BASE_URL = 'https://image.tmdb.org/t/p/w1280';
 const Hero = ({ movie }) => (
   <div className="h-[100vh] lg:h-[85vh] max-h-[700px] lg:max-h-[1000px] relative">
     {movie.poster_path ? (
       <img
-        className="h-full w-full"
+        className="h-full w-full object-cover"
         src={`${BASE_URL}${movie.poster_path}`}
         alt=""
       />

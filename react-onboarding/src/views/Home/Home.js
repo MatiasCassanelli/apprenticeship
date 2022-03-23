@@ -11,13 +11,17 @@ import {
   getLatest,
 } from '../../services/movies';
 import RecommendationCarousel from '../../components/Carousel/RecommendationCarousel';
+import UpcomingMovie from '../../components/UpcomingMovie/UpcomingMovie';
 
 const Home = () => {
   const [popularFilms, setPopularFilms] = useState();
   const [topRatedFilms, setTopRatedFilms] = useState();
   const [nowPlayingFilms, setNowPlayingFilms] = useState();
   const [upcomingFilms, setUpcomingFilms] = useState();
-  const [latestFilm, setLatestFilm] = useState();
+  const [, setLatestFilm] = useState();
+  // just to show different movies each time
+  const [randomMovideIndex, setRandomMovieIndex] = useState(0);
+
   useEffect(() => {
     getPopularMovies().then((res) => {
       setPopularFilms(res);
@@ -30,6 +34,7 @@ const Home = () => {
     });
     getUpcoming().then((res) => {
       setUpcomingFilms(res);
+      setRandomMovieIndex(Math.floor(Math.random() * res.length));
     });
     getLatest().then((res) => {
       setLatestFilm(res);
@@ -39,11 +44,16 @@ const Home = () => {
   return (
     <div className="relative">
       <NavBar />
-      {latestFilm && <Hero movie={latestFilm} />}
+      {upcomingFilms?.length && <Hero movie={upcomingFilms[0]} />}
       <div className="py-3 pl-4 md:pl-[63px]">
         {popularFilms?.length && (
           <Carousel slides={popularFilms} title="Popular on Movy" />
         )}
+      </div>
+      {upcomingFilms?.length && (
+        <UpcomingMovie movie={upcomingFilms[randomMovideIndex]} />
+      )}
+      <div className="py-3 pl-4 md:pl-[63px]">
         {topRatedFilms?.length && (
           <Carousel
             slides={topRatedFilms}

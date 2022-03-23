@@ -137,6 +137,20 @@ const getCredits = async (movieId) => {
     return error;
   }
 };
+
+const getVideos = async (movieId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/videos`, {
+      params: {
+        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+      },
+    });
+    return response.data?.results;
+  } catch (error) {
+    return error;
+  }
+};
+
 export {
   getPopularMovies,
   getTopRated,
@@ -145,4 +159,5 @@ export {
   getLatest,
   getRelatedMovies,
   getCredits,
+  getVideos,
 };
