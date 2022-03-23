@@ -10,6 +10,7 @@ import {
   getUpcoming,
   getLatest,
 } from '../../services/movies';
+import RecommendationCarousel from '../../components/Carousel/RecommendationCarousel';
 
 const Home = () => {
   const [popularFilms, setPopularFilms] = useState();
@@ -51,10 +52,9 @@ const Home = () => {
           />
         )}
         {nowPlayingFilms?.length && (
-          <Carousel
+          <RecommendationCarousel
             slides={nowPlayingFilms}
             title="Recommended movies"
-            recommendedCarousel
           />
         )}
         {upcomingFilms?.length && (

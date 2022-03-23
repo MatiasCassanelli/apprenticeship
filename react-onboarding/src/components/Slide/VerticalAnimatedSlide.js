@@ -2,7 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
 
-const VerticalSlide = ({ imageSrc, title, onFocus }) => (
+const VerticalAnimatedSlide = ({ imageSrc, title, onFocus }) => (
   <div
     className="h-[560px] lg:h-[625px] flex items-center"
     onMouseOver={onFocus}
@@ -63,15 +63,15 @@ const VerticalSlide = ({ imageSrc, title, onFocus }) => (
   </div>
 );
 
-export default VerticalSlide;
+export default VerticalAnimatedSlide;
 
-VerticalSlide.propTypes = {
+VerticalAnimatedSlide.propTypes = {
   imageSrc: T.string,
   title: T.string,
   onFocus: T.func,
 };
 
-VerticalSlide.defaultProps = {
+VerticalAnimatedSlide.defaultProps = {
   imageSrc: '',
   title: '',
   onFocus: () => {},

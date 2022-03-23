@@ -2,8 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
 
-// eslint-disable-next-line react/prop-types
-const Slide = ({
+const AnimatedSlide = ({
   imageSrc,
   title,
   onFocus,
@@ -75,7 +74,7 @@ const Slide = ({
               alt=""
             />
           </div>
-          <div className="flex w-full items-center mt-[15px] truncate">
+          <div className="flex w-full items-center mt-[15px] truncate flex-wrap">
             {genres.map((genre, index) => (
               <div
                 key={genre}
@@ -100,9 +99,9 @@ const Slide = ({
   </div>
 );
 
-export default Slide;
+export default AnimatedSlide;
 
-Slide.propTypes = {
+AnimatedSlide.propTypes = {
   imageSrc: T.string,
   title: T.string,
   onFocus: T.func,
@@ -111,7 +110,7 @@ Slide.propTypes = {
   noAnimatedClassName: T.string,
 };
 
-Slide.defaultProps = {
+AnimatedSlide.defaultProps = {
   imageSrc: '',
   title: '',
   onFocus: () => {},

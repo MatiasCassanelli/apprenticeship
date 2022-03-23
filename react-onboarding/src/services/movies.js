@@ -111,23 +111,26 @@ const getLatest = async () => {
   } catch (error) {
     return error;
   }
-  // try {
-  //   const data = await getMovies(`${BASE_URL}/movie/latest`);
-  //   if (data.ok) {
-  //     const { movie, genres } = data;
-  //     const populatedGenres = movie.genre_ids.map((id) => {
-  //       const genre = genres.find((g) => id === g.id);
-  //       return genre?.name;
-  //     });
-  //     return {
-  //       ...movie,
-  //       genres: populatedGenres,
-  //     };
-  //   }
-  //   return data;
-  // } catch (error) {
-  //   return error;
-  // }
 };
 
-export { getPopularMovies, getTopRated, getNowPlaying, getUpcoming, getLatest };
+const getRelatedMovies = async (movieId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/similar`, {
+      params: {
+        api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+      },
+    });
+    return response?.data?.results;
+  } catch (error) {
+    return error;
+  }
+};
+
+export {
+  getPopularMovies,
+  getTopRated,
+  getNowPlaying,
+  getUpcoming,
+  getLatest,
+  getRelatedMovies,
+};
