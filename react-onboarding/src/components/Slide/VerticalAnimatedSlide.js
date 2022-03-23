@@ -15,7 +15,7 @@ const VerticalAnimatedSlide = ({ imageSrc, title, onFocus }) => (
       <div className={`${styles.details} w-full`}>
         <img
           src="/images/outline-play.png"
-          className="ml-auto w-[140px] h-[140px] lg:w-[152px] lg:h-[152px] play-icon"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] lg:w-[152px] lg:h-[152px] play-icon"
           alt=""
         />
         <div className="float-right rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] lg:text-[14px] leading-[10px] lg:leading-[16px]">

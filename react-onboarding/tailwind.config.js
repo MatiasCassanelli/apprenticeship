@@ -3,7 +3,11 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      lineClamp: {
+        8: '8',
+      },
+    },
   },
   plugins: [
     require('tw-elements/dist/plugin'),
