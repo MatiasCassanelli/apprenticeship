@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
 import styles from './recommendation.module.scss';
 import Overview from './Overview';
-import { getRelatedMovies } from '../../services/movies';
+import { getRelatedMovies, getCredits } from '../../services/movies';
 import MoreLikeThis from './MoreLikeThis';
+import Details from './Details';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 
 const Recommendation = ({ movie, onClose }) => {
   const [selectedSection, setSelectedSection] = useState('overview');
   const [relatedMovies, setRelatedMovies] = useState([]);
+  const [credits, setCredits] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
@@ -20,6 +22,9 @@ const Recommendation = ({ movie, onClose }) => {
     setSelectedSection('overview');
     getRelatedMovies(movie.id).then((res) => {
       setRelatedMovies(res);
+    });
+    getCredits(movie.id).then((res) => {
+      setCredits(res);
     });
   }, [movie]);
 
@@ -35,13 +40,13 @@ const Recommendation = ({ movie, onClose }) => {
           alt=""
         />
         <div
+          className="absolute top-[13px] lg:top-[22px] right-[20px] lg:right-[36px] z-10 lg:cursor-pointer"
           onClick={() => {
             setIsMounted(false);
             setTimeout(() => {
               onClose();
             }, 400);
           }}
-          className="absolute top-[13px] lg:top-[22px] right-[20px] lg:right-[36px] z-10 lg:cursor-pointer"
         >
           <img
             className="w-[20px] lg:w-[22px] h-[20px] lg:h-[22px]"
@@ -49,25 +54,47 @@ const Recommendation = ({ movie, onClose }) => {
             alt=""
           />
         </div>
-        <Overview
-          title={movie.title}
-          overview={movie.overview}
-          genres={movie.genres}
-          className={`${
-            selectedSection === 'overview'
-              ? styles.horizontalShow
-              : styles.horizontalHide
-          }`}
-        />
-        <MoreLikeThis
-          title={movie.title}
-          movies={relatedMovies}
-          className={`${
-            selectedSection === 'moreLikeThis'
-              ? styles.horizontalShow
-              : styles.horizontalHide
-          }`}
-        />
+        <div className="w-full h-full absolute top-0 pt-[40px] lg:pt-[95px] px-[20px] lg:pl-[72px] lg:pr-0">
+          <p className="text-xl lg:text-[40px] lg:leading-[48px] mb-[8px] lg:mb-[13px]">
+            A Movy Film
+          </p>
+          <p className="text-4xl lg:text-[60px] lg:leading-[72px] mb-[19px] w-full lg:w-1/2 line-clamp-2">
+            {movie.title}
+          </p>
+          <div className="relative">
+            <Overview
+              title={movie.title}
+              overview={movie.overview}
+              genres={movie.genres}
+              className={`${
+                selectedSection === 'overview'
+                  ? styles.horizontalShow
+                  : styles.horizontalHide
+              }`}
+            />
+            <MoreLikeThis
+              title={movie.title}
+              movies={relatedMovies}
+              className={`${
+                selectedSection === 'moreLikeThis'
+                  ? styles.horizontalShow
+                  : styles.horizontalHide
+              }`}
+            />
+            <Details
+              title={movie.title}
+              cast={credits?.cast}
+              director={credits?.crew?.find((x) => x.job === 'Director')?.name}
+              genres={movie.genres}
+              className={`${
+                selectedSection === 'details'
+                  ? styles.horizontalShow
+                  : styles.horizontalHide
+              }`}
+            />
+          </div>
+        </div>
+
         <div className="absolute bottom-[15px] w-full flex justify-center gap-[20px] lg:gap-[59px]">
           <div
             className="flex items-center flex-col gap-[10px] cursor-pointer"

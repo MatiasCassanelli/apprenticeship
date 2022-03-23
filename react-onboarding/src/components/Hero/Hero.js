@@ -18,12 +18,12 @@ const Hero = ({ movie }) => (
     <div className="w-full absolute px-10 lg:px-[15%] top-[15vh]">
       <div className="text-4 mb-1 lg:mb-6">
         {movie.release_date && (
-          <span>{new Date(movie.release_date).getFullYear()} • </span>
+          <span>{new Date(movie.release_date).getFullYear()}</span>
         )}
-        <span>{movie.genres?.join(', ')}</span>
+        {movie.genres && <span> • {movie.genres.join(', ')}</span>}
       </div>
       <div className="flex items-center w-full justify-between mb-5">
-        <p className="text-[42px] leading-[36px] lg:text-[64px] lg:leading-[75px] uppercase flex-1">
+        <p className="text-[42px] leading-[36px] lg:text-[64px] lg:leading-[75px] uppercase flex-1 line-clamp-3 lg:line-clamp-2">
           {movie.title}
         </p>
         <div className="float-right rounded-full px-3 py-1 w-fit border-[1.5px] border-solid border-[#92AAD7] text-[8.5px] lg:text-[14px] leading-[10px] lg:leading-[16px]">
@@ -52,7 +52,9 @@ const Hero = ({ movie }) => (
         </div>
       </div>
 
-      <p className="text-md lg:text-lg lg:mb-[105px] mb-5">{movie.overview}</p>
+      <p className="text-md lg:text-lg lg:mb-[85px] mb-5 line-clamp-8">
+        {movie.overview}
+      </p>
 
       <div className="flex items-center w-full flex-col lg:flex-row gap-2 lg:gap-[60px]">
         <div className="flex items-center justify-between w-full lg:w-auto lg:gap-[60px]">
