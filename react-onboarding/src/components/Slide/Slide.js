@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import T from 'prop-types';
-import styles from './slide.module.scss';
 
 const Slide = ({ imageSrc, title, overview, onFocus }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -11,6 +9,7 @@ const Slide = ({ imageSrc, title, overview, onFocus }) => {
   };
   return (
     <div
+      data-testid="slide-container"
       className="w-[270px] lg:w-[301px] h-[370px]"
       onMouseOver={onSlideFocus}
       onFocus={onSlideFocus}
@@ -21,7 +20,7 @@ const Slide = ({ imageSrc, title, overview, onFocus }) => {
           isFocused && 'transition ease-in-out delay-150 scale-110 duration-300'
         }`}
         src={imageSrc}
-        alt=""
+        alt={title}
       />
       <div className={`flex mt-4 items-start ${isFocused && 'font-semibold'}`}>
         <p className="line-clamp-2 text-[16px] leading-[25px] flex-1">
