@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
 import { getVideos } from '../../services/movies';
+import styles from './upcomingMovie.module.scss';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w780';
 const YOUTUBE_URL = 'https://www.youtube.com/embed/';
@@ -29,11 +30,13 @@ const UpcomingMovie = ({ movie }) => {
 
   return (
     <div className="h-[800px] lg:h-[600px] w-full relative">
+      <div className={styles.topGradient} />
       <img
         className="h-full w-full object-cover"
         src={`${BASE_URL}${movie.poster_path}`}
         alt=""
       />
+      <div className={styles.bottomGradient} />
       <div className="absolute top-[34px] px-[17px] lg:h-[500px] w-full flex flex-wrap">
         {videoSrc && (
           <iframe
