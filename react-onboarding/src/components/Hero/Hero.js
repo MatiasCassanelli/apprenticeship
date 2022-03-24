@@ -2,19 +2,20 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './hero.module.scss';
 
-const BASE_URL = 'https://image.tmdb.org/t/p/w300';
+const BASE_URL = 'https://image.tmdb.org/t/p/w1280';
 const Hero = ({ movie }) => (
   <div className="h-[100vh] lg:h-[85vh] max-h-[700px] lg:max-h-[1000px] relative">
+    <div className={styles.topGradient} />
     {movie.poster_path ? (
       <img
-        className="h-full w-full"
+        className="h-full w-full object-cover"
         src={`${BASE_URL}${movie.poster_path}`}
         alt=""
       />
     ) : (
       <div className="w-full h-full bg-black" />
     )}
-    <div className={`${styles.mask} w-full absolute -bottom-[50px] z-2`} />
+    <div className={styles.bottomGradient} />
     <div className="w-full absolute px-10 lg:px-[15%] top-[15vh]">
       <div className="text-4 mb-1 lg:mb-6">
         {movie.release_date && (
