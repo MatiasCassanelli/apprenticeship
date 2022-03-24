@@ -37,6 +37,10 @@ test('should render video player after fetch video data', async () => {
   await waitFor(() => expect(getVideoSpy).toHaveBeenCalledWith(mockMovie.id));
   const videoPlayer = screen.getByTitle(mockMovie.title);
   expect(videoPlayer).toBeInTheDocument();
+  expect(videoPlayer).toHaveAttribute(
+    'src',
+    'https://www.youtube.com/embed/6JnN1DmbqoU',
+  );
 });
 
 test('should not render video player because video object is not expected', async () => {
