@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
 import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
 import { getVideos } from '../../services/movies';
@@ -40,6 +39,7 @@ const UpcomingMovie = ({ movie }) => {
       <div className="absolute top-[34px] px-[17px] lg:h-[500px] w-full flex flex-wrap">
         {videoSrc && (
           <iframe
+            title={movie.title}
             src={videoSrc}
             className="w-full lg:w-1/2 h-[350px] lg:h-full order-2 lg:order-1"
           />
