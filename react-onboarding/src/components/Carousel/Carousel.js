@@ -5,7 +5,6 @@ import VerticalAnimatedSlide from '../Slide/VerticalAnimatedSlide';
 import Slide from '../Slide/Slide';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
-const SLIDE_WIDTH = 263;
 
 const Carousel = ({
   slides,
@@ -17,13 +16,21 @@ const Carousel = ({
   enableAnimation,
   className,
 }) => {
-  let SlideComponent =
-    type === 'horizontal' ? AnimatedSlide : VerticalAnimatedSlide;
-  SlideComponent = enableAnimation ? SlideComponent : Slide;
-  const maxScrollWidth = useRef(0);
+  let slideWidth;
+  let SlideComponent;
   const carousel = useRef(null);
+  const [maxScrollWidth, setMaxScrollWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedMovie, setSelectedMovie] = useState();
+
+  if (type === 'horizontal') {
+    slideWidth = 270;
+    SlideComponent = enableAnimation ? AnimatedSlide : Slide;
+  }
+  if (type === 'vertical') {
+    slideWidth = 250;
+    SlideComponent = enableAnimation ? VerticalAnimatedSlide : Slide;
+  }
 
   const movePrev = () => {
     if (currentIndex > 0) {
@@ -34,19 +41,23 @@ const Carousel = ({
   const moveNext = () => {
     if (
       carousel.current !== null &&
-      SLIDE_WIDTH * currentIndex <= maxScrollWidth.current
+      slideWidth * currentIndex <= maxScrollWidth
     ) {
       setCurrentIndex(currentIndex + 1);
     }
   };
 
   const isDisabled = (direction) => {
+    if (slides.length * slideWidth < carousel.current?.clientWidth) {
+      return true;
+    }
+
     if (direction === 'prev') {
       return currentIndex <= 0;
     }
 
     if (direction === 'next' && carousel.current !== null) {
-      return slides?.length <= currentIndex;
+      return slides.length <= currentIndex;
     }
 
     return false;
@@ -60,18 +71,23 @@ const Carousel = ({
 
   useEffect(() => {
     if (carousel !== null && carousel.current !== null) {
-      carousel.current.scrollLeft = SLIDE_WIDTH * currentIndex;
+      carousel.current.scrollLeft = slideWidth * currentIndex;
     }
   }, [currentIndex]);
 
   useEffect(() => {
-    maxScrollWidth.current = carousel.current
-      ? carousel.current.scrollWidth - SLIDE_WIDTH - 60
-      : 0;
+    setMaxScrollWidth(
+      carousel.current && carousel.current.scrollWidth > 0
+        ? carousel.current.scrollWidth - carousel.current.offsetWidth
+        : 0,
+    );
   }, []);
 
-  return (
-    <div className="carousel mx-auto mb-6 lg:my-1.5 relative">
+  return slides.length ? (
+    <div
+      className="carousel mx-auto mb-6 lg:my-1.5 relative"
+      data-testid="carousel"
+    >
       <h2 className="text-[24px] lg:text-[28px] leading-8 font-bold lg:mb-4 text-white lg:absolute">
         {title}
       </h2>
@@ -79,6 +95,7 @@ const Carousel = ({
         {/* Control begins */}
         <div className="flex justify-between absolute top left w-full h-full">
           <button
+            data-testid="prev-button"
             type="button"
             onClick={movePrev}
             className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
@@ -91,6 +108,7 @@ const Carousel = ({
             <span className="visually-hidden">Previous</span>
           </button>
           <button
+            data-testid="next-button"
             type="button"
             onClick={moveNext}
             className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
@@ -141,7 +159,7 @@ const Carousel = ({
       </div>
       {/* Carousel ends */}
     </div>
-  );
+  ) : null;
 };
 
 export default Carousel;
