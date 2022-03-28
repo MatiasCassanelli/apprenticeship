@@ -131,7 +131,7 @@ const Carousel = ({
           {slides.map((slide) => (
             <div
               key={slide.id}
-              className="snap-always relative snap-center md:snap-start"
+              className="snap-always relative snap-center md:snap-start cursor-pointer"
             >
               {recommendedCarousel && slide === selectedMovie && (
                 <img

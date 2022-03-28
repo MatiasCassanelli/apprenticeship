@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import NavBar from '../../components/NavBar/NavBar';
 import Carousel from '../../components/Carousel/Carousel';
@@ -21,6 +22,7 @@ const Home = () => {
   const [, setLatestFilm] = useState();
   // just to show different movies each time
   const [randomMovideIndex, setRandomMovieIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPopularMovies().then((res) => {
@@ -41,13 +43,23 @@ const Home = () => {
     });
   }, []);
 
+  const onMovieClick = (movieId) => {
+    navigate(`/trailer/${movieId}`);
+  };
+
   return (
     <div className="relative">
       <NavBar />
-      {upcomingFilms?.length && <Hero movie={upcomingFilms[0]} />}
+      {upcomingFilms?.length && (
+        <Hero movie={upcomingFilms[0]} onTrailerClick={onMovieClick} />
+      )}
       <div className="py-3 pl-4 md:pl-[63px]">
         {popularFilms?.length && (
-          <Carousel slides={popularFilms} title="Popular on Movy" />
+          <Carousel
+            slides={popularFilms}
+            title="Popular on Movy"
+            onSlideClick={onMovieClick}
+          />
         )}
       </div>
       {upcomingFilms?.length && (
@@ -59,16 +71,22 @@ const Home = () => {
             slides={topRatedFilms}
             title="Most Viewed"
             type="vertical"
+            onSlideClick={onMovieClick}
           />
         )}
         {nowPlayingFilms?.length && (
           <RecommendationCarousel
             slides={nowPlayingFilms}
             title="Recommended movies"
+            onSlideClick={onMovieClick}
           />
         )}
         {upcomingFilms?.length && (
-          <Carousel slides={upcomingFilms} title="Recommended movies" />
+          <Carousel
+            slides={upcomingFilms}
+            title="Recommended movies"
+            onSlideClick={onMovieClick}
+          />
         )}
       </div>
       <Footer />
