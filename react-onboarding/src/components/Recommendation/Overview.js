@@ -85,7 +85,7 @@ Overview.propTypes = {
   overview: T.string,
   genres: T.arrayOf(T.string),
   className: T.string,
-  id: T.string,
+  id: T.number,
 };
 
 Overview.defaultProps = {

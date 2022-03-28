@@ -103,7 +103,7 @@ Hero.propTypes = {
     title: T.string,
     overview: T.string,
     genres: T.arrayOf(T.string),
-    id: T.string,
+    id: T.number,
   }),
 };
 
