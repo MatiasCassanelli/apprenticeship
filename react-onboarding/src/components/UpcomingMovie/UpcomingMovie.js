@@ -16,7 +16,7 @@ const UpcomingMovie = ({ movie }) => {
     setReleaseData(`${month} ${day}`);
     getVideoUrl(movie.id).then((videoUrl) => {
       if (videoUrl) {
-          setVideoSrc(videoUrl);
+        setVideoSrc(videoUrl);
       }
     });
   }, [movie]);
@@ -51,7 +51,7 @@ const UpcomingMovie = ({ movie }) => {
             {movie.title}
           </p>
           <div className="flex w-full items-center gap-[127px] mb-[14px]">
-            <div className="flex items-center h-[48px] bg-[#D8D8D8]/[.3] w-[150px] justify-center" onClick={onVideoClick}>
+            <div className="flex items-center h-[48px] bg-[#D8D8D8]/[.3] w-[150px] justify-center">
               <img
                 src="/images/mark-hero.png"
                 alt=""
