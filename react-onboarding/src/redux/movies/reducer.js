@@ -1,4 +1,4 @@
-import { SET_MOVIES, REMOVE_MOVIES } from './actions';
+import { SET_MOVIES, SET_RECOMMENDATION } from './actions';
 
 const getCategoryMovies = ({ category, movies }, state) => {
   if (state[category]?.length) {
@@ -15,9 +15,13 @@ export default (state = {}, { type, payload }) => {
         ...state,
         [payload.category]: getCategoryMovies(payload, state),
       };
-    case REMOVE_MOVIES:
+    case SET_RECOMMENDATION:
       return {
-        ...state.filter((x) => x[payload.category]),
+        ...state,
+        recommendation: {
+          ...state.recommendation,
+          ...payload,
+        },
       };
     default:
       return state;

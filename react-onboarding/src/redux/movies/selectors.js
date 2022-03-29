@@ -1,4 +1,4 @@
 const getMovies = (state) => state.movies;
+const getRecommendation = (state) => state.movies.recommendation;
 
-// eslint-disable-next-line import/prefer-default-export
-export { getMovies };
+export { getMovies, getRecommendation };
