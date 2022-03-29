@@ -15,6 +15,7 @@ const Carousel = ({
   resetFocus,
   enableAnimation,
   className,
+  onSlideClick,
 }) => {
   let slideWidth;
   let SlideComponent;
@@ -130,7 +131,7 @@ const Carousel = ({
           {slides.map((slide) => (
             <div
               key={slide.id}
-              className="snap-always relative snap-center md:snap-start"
+              className="snap-always relative snap-center md:snap-start cursor-pointer"
             >
               {recommendedCarousel && slide === selectedMovie && (
                 <img
@@ -148,6 +149,7 @@ const Carousel = ({
                   setSelectedMovie(slide);
                   onMovieSelect(slide);
                 }}
+                onClick={() => onSlideClick(slide.id)}
                 shouldAnimateOnHover={!recommendedCarousel}
                 noAnimatedClassName={`${
                   slide === selectedMovie && 'border-4 border-white box-content'
@@ -169,6 +171,7 @@ Carousel.propTypes = {
   slides: T.arrayOf(
     T.shape({
       poster_path: T.string,
+      id: T.number,
     }),
   ),
   type: T.string,
@@ -176,6 +179,7 @@ Carousel.propTypes = {
   resetFocus: T.bool,
   enableAnimation: T.bool,
   onMovieSelect: T.func,
+  onSlideClick: T.func,
   className: T.string,
 };
 
@@ -187,5 +191,6 @@ Carousel.defaultProps = {
   resetFocus: false,
   enableAnimation: true,
   onMovieSelect: () => {},
+  onSlideClick: () => {},
   className: '',
 };

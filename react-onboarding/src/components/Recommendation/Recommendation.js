@@ -66,6 +66,7 @@ const Recommendation = ({ movie, onClose }) => {
               title={movie.title}
               overview={movie.overview}
               genres={movie.genres}
+              id={movie.id}
               className={`${
                 selectedSection === 'overview'
                   ? styles.horizontalShow

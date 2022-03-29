@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
-import { getVideos } from '../../services/movies';
+import { getVideoUrl } from '../../services/movies';
 import styles from './upcomingMovie.module.scss';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w780';
-const YOUTUBE_URL = 'https://www.youtube.com/embed/';
 
 const UpcomingMovie = ({ movie }) => {
   const [videoSrc, setVideoSrc] = useState('');
@@ -15,14 +14,9 @@ const UpcomingMovie = ({ movie }) => {
     const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date);
     const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
     setReleaseData(`${month} ${day}`);
-    getVideos(movie.id).then((videos) => {
-      if (videos.length) {
-        const trailer = videos.find(
-          (x) => x.type === 'Trailer' && x.site === 'YouTube',
-        );
-        if (trailer) {
-          setVideoSrc(`${YOUTUBE_URL}${trailer.key}`);
-        }
+    getVideoUrl(movie.id).then((videoUrl) => {
+      if (videoUrl) {
+        setVideoSrc(videoUrl);
       }
     });
   }, [movie]);

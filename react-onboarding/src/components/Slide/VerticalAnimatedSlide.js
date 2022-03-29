@@ -2,11 +2,12 @@ import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
 
-const VerticalAnimatedSlide = ({ imageSrc, title, onFocus }) => (
+const VerticalAnimatedSlide = ({ imageSrc, title, onFocus, onClick }) => (
   <div
     className="h-[560px] lg:h-[625px] flex items-center"
     onMouseOver={onFocus}
     onFocus={onFocus}
+    onClick={onClick}
   >
     <div
       className={`${styles['film-details']} w-[250px] h-[430px] lg:w-[275px] lg:h-[473px] hover:w-[330px] hover:h-[560px] lg:hover:w-[363px] lg:hover:h-[625px]`}
@@ -69,10 +70,12 @@ VerticalAnimatedSlide.propTypes = {
   imageSrc: T.string,
   title: T.string,
   onFocus: T.func,
+  onClick: T.func,
 };
 
 VerticalAnimatedSlide.defaultProps = {
   imageSrc: '',
   title: '',
   onFocus: () => {},
+  onClick: () => {},
 };

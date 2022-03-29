@@ -6,6 +6,7 @@ const AnimatedSlide = ({
   imageSrc,
   title,
   onFocus,
+  onClick,
   genres,
   shouldAnimateOnHover,
   noAnimatedClassName,
@@ -14,6 +15,7 @@ const AnimatedSlide = ({
     <div
       onMouseOver={onFocus}
       onFocus={onFocus}
+      onClick={onClick}
       className={`${
         styles['film-details']
       } w-[270px] h-[150px] lg:w-[301px] lg:h-[165px] ${
@@ -105,6 +107,7 @@ AnimatedSlide.propTypes = {
   imageSrc: T.string,
   title: T.string,
   onFocus: T.func,
+  onClick: T.func,
   genres: T.arrayOf(T.string),
   shouldAnimateOnHover: T.bool,
   noAnimatedClassName: T.string,
@@ -114,6 +117,7 @@ AnimatedSlide.defaultProps = {
   imageSrc: '',
   title: '',
   onFocus: () => {},
+  onClick: () => {},
   genres: [],
   shouldAnimateOnHover: true,
   noAnimatedClassName: '',

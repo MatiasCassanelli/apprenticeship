@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import T from 'prop-types';
 
-const Slide = ({ imageSrc, title, overview, onFocus }) => {
+const Slide = ({ imageSrc, title, overview, onFocus, onClick }) => {
   const [isFocused, setIsFocused] = useState(false);
   const onSlideFocus = () => {
     onFocus();
@@ -14,6 +14,7 @@ const Slide = ({ imageSrc, title, overview, onFocus }) => {
       onMouseOver={onSlideFocus}
       onFocus={onSlideFocus}
       onMouseLeave={() => setIsFocused(false)}
+      onClick={onClick}
     >
       <img
         className={`w-full h-[150px] mt-4 object-cover ${
@@ -47,6 +48,7 @@ Slide.propTypes = {
   imageSrc: T.string,
   title: T.string,
   onFocus: T.func,
+  onClick: T.func,
   overview: T.string,
 };
 
@@ -54,5 +56,6 @@ Slide.defaultProps = {
   imageSrc: '',
   title: '',
   onFocus: () => {},
+  onClick: () => {},
   overview: '',
 };

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
+const YOUTUBE_URL = 'https://www.youtube.com/embed/';
 
 const populateGenres = (movies, genres) =>
   movies.map((movie) => {
@@ -138,14 +139,23 @@ const getCredits = async (movieId) => {
   }
 };
 
-const getVideos = async (movieId) => {
+const getVideoUrl = async (movieId) => {
   try {
     const response = await axios.get(`${BASE_URL}/movie/${movieId}/videos`, {
       params: {
         api_key: process.env.REACT_APP_FILM_DB_API_KEY,
       },
     });
-    return response.data?.results;
+    const { results: videos } = response.data || {};
+    if (videos.length) {
+      const trailer = videos.find(
+        (x) => x.type === 'Trailer' && x.site === 'YouTube',
+      );
+      if (trailer) {
+        return `${YOUTUBE_URL}${trailer.key}`;
+      }
+    }
+    return '';
   } catch (error) {
     return error;
   }
@@ -159,5 +169,5 @@ export {
   getLatest,
   getRelatedMovies,
   getCredits,
-  getVideos,
+  getVideoUrl,
 };
