@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { getVideoUrl } from '../../services/movies';
+import { setTrailer } from '../../redux/movies/actions';
+import { getTrailer } from '../../redux/movies/selectors';
 import styles from './upcomingMovie.module.scss';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w780';
@@ -8,17 +11,29 @@ const BASE_URL = 'https://image.tmdb.org/t/p/w780';
 const UpcomingMovie = ({ movie }) => {
   const [videoSrc, setVideoSrc] = useState('');
   const [releaseDate, setReleaseData] = useState('');
+  const dispatch = useDispatch();
+  const trailer = useSelector(getTrailer);
 
   useEffect(() => {
     const date = new Date(movie.release_date);
     const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date);
     const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
     setReleaseData(`${month} ${day}`);
-    getVideoUrl(movie.id).then((videoUrl) => {
-      if (videoUrl) {
-        setVideoSrc(videoUrl);
-      }
-    });
+    if (trailer?.movieId === movie.id) {
+      setVideoSrc(trailer.url);
+    } else {
+      getVideoUrl(movie.id).then((videoUrl) => {
+        if (videoUrl) {
+          dispatch(
+            setTrailer({
+              url: videoUrl,
+              movieId: movie.id,
+            }),
+          );
+          setVideoSrc(videoUrl);
+        }
+      });
+    }
   }, [movie]);
 
   return (

@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_RECOMMENDATION } from './actions';
+import { SET_MOVIES, SET_RECOMMENDATION, SET_TRAILER } from './actions';
 
 const getCategoryMovies = ({ category, movies }, state) => {
   if (state[category]?.length) {
@@ -20,6 +20,14 @@ export default (state = {}, { type, payload }) => {
         ...state,
         recommendation: {
           ...state.recommendation,
+          ...payload,
+        },
+      };
+    case SET_TRAILER:
+      return {
+        ...state,
+        trailer: {
+          ...state.trailer,
           ...payload,
         },
       };
