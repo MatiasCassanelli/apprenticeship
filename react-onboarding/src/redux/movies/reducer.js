@@ -18,10 +18,13 @@ export default (state = {}, { type, payload }) => {
     case SET_RECOMMENDATION:
       return {
         ...state,
-        recommendation: {
-          ...state.recommendation,
-          ...payload,
-        },
+        recommendation:
+          state.recommendation?.movieId === payload.movieId
+            ? {
+                ...state.recommendation,
+                ...payload,
+              }
+            : { ...payload },
       };
     case SET_TRAILER:
       return {

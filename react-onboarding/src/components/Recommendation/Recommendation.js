@@ -31,16 +31,12 @@ const Recommendation = ({ movie, onClose }) => {
       setRelatedMovies(moreLikeThis);
       setCredits(prevCredits);
     } else {
-      dispatch(
-        setRecommendation({
-          movieId: movie.id,
-        }),
-      );
       getRelatedMovies(movie.id).then((res) => {
         setRelatedMovies(res);
         dispatch(
           setRecommendation({
             moreLikeThis: res,
+            movieId: movie.id,
           }),
         );
       });
@@ -49,6 +45,7 @@ const Recommendation = ({ movie, onClose }) => {
         dispatch(
           setRecommendation({
             credits: res,
+            movieId: movie.id,
           }),
         );
       });
