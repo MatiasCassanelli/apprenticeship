@@ -31,5 +31,6 @@ module.exports = {
       },
     ],
     'eol-last': 'error',
+    'default-param-last': 0,
   },
 };

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import T from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './recommendation.module.scss';
 import Overview from './Overview';
 import { getRelatedMovies, getCredits } from '../../services/movies';
 import MoreLikeThis from './MoreLikeThis';
 import Details from './Details';
+import { setRecommendation } from '../../redux/movies/actions';
+import { getRecommendation } from '../../redux/movies/selectors';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w300';
 
@@ -13,6 +16,9 @@ const Recommendation = ({ movie, onClose }) => {
   const [relatedMovies, setRelatedMovies] = useState([]);
   const [credits, setCredits] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
+  const dispatch = useDispatch();
+  const recommendation = useSelector(getRecommendation);
+
   useEffect(() => {
     setIsMounted(true);
     return () => setIsMounted(false);
@@ -20,12 +26,30 @@ const Recommendation = ({ movie, onClose }) => {
 
   useEffect(() => {
     setSelectedSection('overview');
-    getRelatedMovies(movie.id).then((res) => {
-      setRelatedMovies(res);
-    });
-    getCredits(movie.id).then((res) => {
-      setCredits(res);
-    });
+    if (recommendation?.movieId === movie.id) {
+      const { moreLikeThis, credits: prevCredits } = recommendation;
+      setRelatedMovies(moreLikeThis);
+      setCredits(prevCredits);
+    } else {
+      getRelatedMovies(movie.id).then((res) => {
+        setRelatedMovies(res);
+        dispatch(
+          setRecommendation({
+            moreLikeThis: res,
+            movieId: movie.id,
+          }),
+        );
+      });
+      getCredits(movie.id).then((res) => {
+        setCredits(res);
+        dispatch(
+          setRecommendation({
+            credits: res,
+            movieId: movie.id,
+          }),
+        );
+      });
+    }
   }, [movie]);
 
   return (
