@@ -125,6 +125,7 @@ const Carousel = ({
         {/* Control ends */}
         {/* Carousel begins */}
         <div
+          data-cy="carousel"
           ref={carousel}
           className={`relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px] ${className}`}
         >
