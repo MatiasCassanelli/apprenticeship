@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import T from 'prop-types';
 
-const Slide = ({ imageSrc, title, overview, onFocus, onClick }) => {
+const Slide = ({ imageSrc, title, overview, onFocus, onClick, id }) => {
   const [isFocused, setIsFocused] = useState(false);
   const onSlideFocus = () => {
     onFocus();
@@ -9,7 +9,7 @@ const Slide = ({ imageSrc, title, overview, onFocus, onClick }) => {
   };
   return (
     <div
-      data-testid="slide-container"
+      data-testid={`slide-${id}`}
       className="w-[270px] lg:w-[301px] h-[370px]"
       onMouseOver={onSlideFocus}
       onFocus={onSlideFocus}
@@ -50,6 +50,7 @@ Slide.propTypes = {
   onFocus: T.func,
   onClick: T.func,
   overview: T.string,
+  id: T.number,
 };
 
 Slide.defaultProps = {
@@ -58,4 +59,5 @@ Slide.defaultProps = {
   onFocus: () => {},
   onClick: () => {},
   overview: '',
+  id: '',
 };

@@ -142,6 +142,7 @@ const Carousel = ({
                 />
               )}
               <SlideComponent
+                id={slide.id}
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}

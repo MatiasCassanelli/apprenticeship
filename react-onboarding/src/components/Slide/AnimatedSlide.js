@@ -3,6 +3,7 @@ import T from 'prop-types';
 import styles from './slide.module.scss';
 
 const AnimatedSlide = ({
+  id,
   imageSrc,
   title,
   onFocus,
@@ -13,6 +14,7 @@ const AnimatedSlide = ({
 }) => (
   <div className="h-[180px] lg:h-[303px] flex items-center">
     <div
+      data-testid={id}
       onMouseOver={onFocus}
       onFocus={onFocus}
       onClick={onClick}
@@ -111,6 +113,7 @@ AnimatedSlide.propTypes = {
   genres: T.arrayOf(T.string),
   shouldAnimateOnHover: T.bool,
   noAnimatedClassName: T.string,
+  id: T.number,
 };
 
 AnimatedSlide.defaultProps = {
@@ -121,4 +124,5 @@ AnimatedSlide.defaultProps = {
   genres: [],
   shouldAnimateOnHover: true,
   noAnimatedClassName: '',
+  id: '',
 };
