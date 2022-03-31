@@ -2,6 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import styles from './hero.module.scss';
+import StarRating from '../StarRating/StarRating';
 
 const BASE_URL = 'https://image.tmdb.org/t/p/w1280';
 const Hero = ({ movie }) => {
@@ -51,13 +52,10 @@ const Hero = ({ movie }) => {
             />
             <span className="text-[16px] block">Quentin Tarantino</span>
           </div>
-          <div className="flex order-2 lg:order-3">
-            <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-            <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-            <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-            <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-            <img className="w-3 h-3" src="/images/round-star_half.png" alt="" />
-          </div>
+          <StarRating
+            rating={movie.vote_average}
+            className="order-2 lg:order-3"
+          />
         </div>
 
         <p className="text-md lg:text-lg lg:mb-[85px] mb-5 line-clamp-8">
@@ -104,6 +102,7 @@ Hero.propTypes = {
     overview: T.string,
     genres: T.arrayOf(T.string),
     id: T.number,
+    vote_average: T.number,
   }),
 };
 
