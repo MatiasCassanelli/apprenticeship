@@ -12,7 +12,7 @@ const StarRating = ({ rating, className, starClassName }) => {
         <img
           className={`w-3 h-3 ${starClassName}`}
           src="/images/round-star.png"
-          alt=""
+          alt={`star-${index}`}
         />,
       );
     }
@@ -21,19 +21,21 @@ const StarRating = ({ rating, className, starClassName }) => {
         <img
           className={`w-3 h-3 ${starClassName}`}
           src="/images/round-star_half.png"
-          alt=""
+          alt="half-star"
         />,
       );
     }
     return stars;
   };
   return (
-    <div className={`flex items-center ${className}`}>
-      {getStars().map((star, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div key={index}>{star}</div>
-      ))}
-    </div>
+    rating > 0 && (
+      <div className={`flex items-center ${className}`}>
+        {getStars().map((star, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={index}>{star}</div>
+        ))}
+      </div>
+    )
   );
 };
 
