@@ -1,4 +1,5 @@
 import mockMovies from '../fixtures/mockMovies.json';
+import mockSingleMovie from '../fixtures/mockSingleMovie.json';
 
 describe('Components E2E', () => {
   const movies = mockMovies.results;
@@ -15,21 +16,21 @@ describe('Components E2E', () => {
   });
 
   it('should render the hero correctly', () => {
-    cy.intercept('GET', '/3/movie/upcoming*', {
-      fixture: 'mockMovies.json',
+    cy.intercept('GET', '/3/movie/latest*', {
+      fixture: 'mockSingleMovie.json',
     });
     cy.visit('http://localhost:3000');
     cy.get('[data-testid=hero]')
       .find('img')
       .should('have.attr', 'src')
-      .should('include', movies[0].poster_path);
+      .should('include', mockSingleMovie.poster_path);
 
     cy.get('[data-testid=hero]')
       .invoke('text')
-      .should('include', movies[0].title);
+      .should('include', mockSingleMovie.title);
     cy.get('[data-testid=hero]')
       .invoke('text')
-      .should('include', movies[0].overview);
+      .should('include', mockSingleMovie.overview);
   });
 
   it('carousel should render 20 items', () => {
@@ -38,9 +39,19 @@ describe('Components E2E', () => {
     });
     cy.visit('http://localhost:3000');
 
-    cy.get('[data-cy=carousel]')
+    cy.get(`[data-cy=PopularonMovy-carousel]`)
       .children()
       .should('have.length', movies.length);
+  });
+
+  it('should redirect to trailer page', () => {
+    cy.intercept('GET', '/3/movie/popular*', {
+      fixture: 'mockMovies.json',
+    });
+    cy.visit('http://localhost:3000');
+
+    cy.get(`[data-testid=${movies[0].id}]`).first().click();
+    cy.url().should('include', `/trailer/${movies[0].id}`);
   });
 
   it('should render upcoming movie correctly', () => {
