@@ -1,8 +1,16 @@
 import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
+import StarRating from '../StarRating/StarRating';
 
-const VerticalAnimatedSlide = ({ imageSrc, title, onFocus, onClick, id }) => (
+const VerticalAnimatedSlide = ({
+  imageSrc,
+  title,
+  onFocus,
+  onClick,
+  rating,
+  id,
+}) => (
   <div
     data-testid={id}
     className="h-[560px] lg:h-[625px] flex items-center"
@@ -24,21 +32,11 @@ const VerticalAnimatedSlide = ({ imageSrc, title, onFocus, onClick, id }) => (
           PG-13
         </div>
         <div className="absolute bottom-0 left-0 px-8 pb-9 w-full">
-          <div className="flex items-center w-full justify-between ">
-            <p className="text-2xl lg:text-[44px] lg:leading-[53px] my-0 flex-1">
+          <div className="w-full">
+            <p className="text-2xl lg:text-[44px] lg:leading-[53px] my-0 mb-1.5 flex-1">
               {title}
             </p>
-            <div className="flex items-center">
-              <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-              <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-              <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-              <img className="w-3 h-3" src="/images/round-star.png" alt="" />
-              <img
-                className="w-3 h-3"
-                src="/images/round-star_half.png"
-                alt=""
-              />
-            </div>
+            <StarRating rating={rating} className="mb-2" />
           </div>
           <div className="flex mt-1 w-full justify-between">
             <div className="flex">
@@ -72,6 +70,7 @@ VerticalAnimatedSlide.propTypes = {
   title: T.string,
   onFocus: T.func,
   onClick: T.func,
+  rating: T.number,
   id: T.number,
 };
 
@@ -80,5 +79,6 @@ VerticalAnimatedSlide.defaultProps = {
   title: '',
   onFocus: () => {},
   onClick: () => {},
+  rating: 0,
   id: '',
 };

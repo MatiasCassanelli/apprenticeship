@@ -1,6 +1,7 @@
 import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
+import StarRating from '../StarRating/StarRating';
 
 const AnimatedSlide = ({
   id,
@@ -9,6 +10,7 @@ const AnimatedSlide = ({
   onFocus,
   onClick,
   genres,
+  rating,
   shouldAnimateOnHover,
   noAnimatedClassName,
 }) => (
@@ -51,33 +53,10 @@ const AnimatedSlide = ({
           <p className="text-xl lg:text-[44px] lg:leading-[53px] mt-[36px] lg:mt-[48px] mb-[12px]">
             {title}
           </p>
-          <div className="flex">
-            <img
-              className="w-[11px] h-2.5 lg:w-[16px] lg:h-[15px]"
-              src="/images/round-star.png"
-              alt=""
-            />
-            <img
-              className="w-[11px] h-2.5 lg:w-[16px] lg:h-[15px]"
-              src="/images/round-star.png"
-              alt=""
-            />
-            <img
-              className="w-[11px] h-2.5 lg:w-[16px] lg:h-[15px]"
-              src="/images/round-star.png"
-              alt=""
-            />
-            <img
-              className="w-[11px] h-2.5 lg:w-[16px] lg:h-[15px]"
-              src="/images/round-star.png"
-              alt=""
-            />
-            <img
-              className="w-[11px] h-2.5 lg:w-[16px] lg:h-[15px]"
-              src="/images/round-star_half.png"
-              alt=""
-            />
-          </div>
+          <StarRating
+            rating={rating}
+            starClassName="w-[11px] h-2.5 lg:w-[16px] lg:h-[15px]"
+          />
           <div className="flex w-full items-center mt-[15px] truncate flex-wrap">
             {genres.map((genre, index) => (
               <div
@@ -113,6 +92,7 @@ AnimatedSlide.propTypes = {
   genres: T.arrayOf(T.string),
   shouldAnimateOnHover: T.bool,
   noAnimatedClassName: T.string,
+  rating: T.number,
   id: T.number,
 };
 
@@ -124,5 +104,6 @@ AnimatedSlide.defaultProps = {
   genres: [],
   shouldAnimateOnHover: true,
   noAnimatedClassName: '',
+  rating: 0,
   id: '',
 };

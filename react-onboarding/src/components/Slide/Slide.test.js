@@ -2,6 +2,8 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import Slide from './Slide';
 
 const props = {
@@ -12,15 +14,19 @@ const props = {
   onFocus: jest.fn(),
   id: 1,
 };
+const mockStore = configureStore();
+const store = mockStore({});
 
 describe('Slide Component', () => {
   test('should render a slide components correctly', () => {
     render(
-      <Slide
-        imageSrc={props.imageSrc}
-        title={props.title}
-        overview={props.overview}
-      />,
+      <Provider store={store}>
+        <Slide
+          imageSrc={props.imageSrc}
+          title={props.title}
+          overview={props.overview}
+        />
+      </Provider>,
     );
     const backgroundImage = screen.getByAltText(props.title);
     expect(backgroundImage).toHaveAttribute('src', props.imageSrc);

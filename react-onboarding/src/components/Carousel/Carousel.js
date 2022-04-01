@@ -156,6 +156,7 @@ const Carousel = ({
                 noAnimatedClassName={`${
                   slide === selectedMovie && 'border-4 border-white box-content'
                 }`}
+                rating={slide.vote_average}
               />
             </div>
           ))}
