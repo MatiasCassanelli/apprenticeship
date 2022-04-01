@@ -3,8 +3,14 @@ module.exports = {
     browser: true,
     es2021: true,
     jest: true,
+    'cypress/globals': true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'prettier',
+    'plugin:cypress/recommended',
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -12,7 +18,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'cypress'],
   rules: {
     'jsx-a11y/click-events-have-key-events': [0],
     'jsx-a11y/no-static-element-interactions': [0],

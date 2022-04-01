@@ -5,7 +5,7 @@ const YOUTUBE_URL = 'https://www.youtube.com/embed/';
 
 const populateGenres = (movies, genres) =>
   movies.map((movie) => {
-    const populatedGenres = movie.genre_ids.map((id) => {
+    const populatedGenres = movie.genre_ids?.map((id) => {
       const genre = genres.find((g) => id === g.id);
       return genre?.name;
     });

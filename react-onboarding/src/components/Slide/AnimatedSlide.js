@@ -4,6 +4,7 @@ import styles from './slide.module.scss';
 import StarRating from '../StarRating/StarRating';
 
 const AnimatedSlide = ({
+  id,
   imageSrc,
   title,
   onFocus,
@@ -15,6 +16,7 @@ const AnimatedSlide = ({
 }) => (
   <div className="h-[180px] lg:h-[303px] flex items-center">
     <div
+      data-testid={id}
       onMouseOver={onFocus}
       onFocus={onFocus}
       onClick={onClick}
@@ -91,6 +93,7 @@ AnimatedSlide.propTypes = {
   shouldAnimateOnHover: T.bool,
   noAnimatedClassName: T.string,
   rating: T.number,
+  id: T.number,
 };
 
 AnimatedSlide.defaultProps = {
@@ -102,4 +105,5 @@ AnimatedSlide.defaultProps = {
   shouldAnimateOnHover: true,
   noAnimatedClassName: '',
   rating: 0,
+  id: '',
 };

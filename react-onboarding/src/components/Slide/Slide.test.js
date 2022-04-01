@@ -10,6 +10,7 @@ const props = {
   overview:
     'A lighthouse keeper and his wife living off the coast of Western Australia raise a baby they rescue from an adrift rowboat.',
   onFocus: jest.fn(),
+  id: 1,
 };
 
 describe('Slide Component', () => {
@@ -33,9 +34,10 @@ describe('Slide Component', () => {
         imageSrc={props.imageSrc}
         title={props.title}
         overview={props.overview}
+        id={props.id}
       />,
     );
-    const container = screen.getByTestId('slide-container');
+    const container = screen.getByTestId(`slide-${props.id}`);
     userEvent.hover(container);
     expect(props.onFocus).not.toHaveBeenCalled();
   });
@@ -47,9 +49,10 @@ describe('Slide Component', () => {
         title={props.title}
         overview={props.overview}
         onFocus={props.onFocus}
+        id={props.id}
       />,
     );
-    const container = screen.getByTestId('slide-container');
+    const container = screen.getByTestId(`slide-${props.id}`);
     userEvent.hover(container);
     expect(props.onFocus).toHaveBeenCalledTimes(1);
   });

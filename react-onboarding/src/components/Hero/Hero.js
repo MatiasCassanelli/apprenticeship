@@ -12,7 +12,10 @@ const Hero = ({ movie }) => {
   };
 
   return (
-    <div className="h-[100vh] lg:h-[85vh] max-h-[700px] lg:max-h-[1000px] relative">
+    <div
+      className="h-[100vh] lg:h-[85vh] max-h-[700px] lg:max-h-[1000px] relative"
+      data-testid="hero"
+    >
       <div className={styles.topGradient} />
       {movie.poster_path ? (
         <img

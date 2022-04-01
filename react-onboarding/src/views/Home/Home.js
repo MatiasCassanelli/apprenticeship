@@ -23,8 +23,6 @@ const Home = () => {
   const [nowPlayingFilms, setNowPlayingFilms] = useState();
   const [upcomingFilms, setUpcomingFilms] = useState();
   const [latestFilm, setLatestFilm] = useState();
-  // just to show different movies each time
-  const [randomMovideIndex, setRandomMovieIndex] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const movies = useSelector(getMovies);
@@ -69,7 +67,6 @@ const Home = () => {
       });
       getUpcoming().then((res) => {
         setUpcomingFilms(res);
-        setRandomMovieIndex(Math.floor(Math.random() * res.length));
         dispatch(
           setMovies({
             category: 'upcoming',
@@ -108,9 +105,7 @@ const Home = () => {
           />
         )}
       </div>
-      {upcomingFilms?.length && (
-        <UpcomingMovie movie={upcomingFilms[randomMovideIndex]} />
-      )}
+      {upcomingFilms?.length && <UpcomingMovie movie={upcomingFilms[2]} />}
       <div className="py-3 pl-4 md:pl-[63px]">
         {topRatedFilms?.length && (
           <Carousel

@@ -9,8 +9,10 @@ const VerticalAnimatedSlide = ({
   onFocus,
   onClick,
   rating,
+  id,
 }) => (
   <div
+    data-testid={id}
     className="h-[560px] lg:h-[625px] flex items-center"
     onMouseOver={onFocus}
     onFocus={onFocus}
@@ -69,6 +71,7 @@ VerticalAnimatedSlide.propTypes = {
   onFocus: T.func,
   onClick: T.func,
   rating: T.number,
+  id: T.number,
 };
 
 VerticalAnimatedSlide.defaultProps = {
@@ -77,4 +80,5 @@ VerticalAnimatedSlide.defaultProps = {
   onFocus: () => {},
   onClick: () => {},
   rating: 0,
+  id: '',
 };
