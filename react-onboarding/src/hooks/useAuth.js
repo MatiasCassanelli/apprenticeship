@@ -1,8 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserDetails, signIn as userSignIn } from '../services/user';
-import { setSessionId, setUserDetails } from '../redux/user/actions';
+import {
+  getUserDetails,
+  signIn as userSignIn,
+  signOut as userSignOut,
+} from '../services/user';
+import {
+  deleteSession,
+  setSessionId,
+  setUserDetails,
+} from '../redux/user/actions';
 import {
   getSessionId,
   getIsAuthenticated,
@@ -40,7 +48,15 @@ const useAuth = () => {
     }
   };
 
-  return { isAuthenticated, sessionId, userDetails, signIn };
+  const signOut = async () => {
+    const res = await userSignOut(sessionId);
+    if (res?.success) {
+      dispatch(deleteSession());
+      document.cookie = `sessionId=`;
+    }
+  };
+
+  return { isAuthenticated, sessionId, userDetails, signIn, signOut };
 };
 
 export default useAuth;

@@ -15,7 +15,7 @@ const App = () => {
         signIn(savedReqToken);
       }
     }
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <Routes>

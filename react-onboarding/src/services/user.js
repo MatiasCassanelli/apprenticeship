@@ -44,6 +44,28 @@ const signIn = async (reqToken) => {
   }
 };
 
+const signOut = async (sessionId) => {
+  try {
+    const response = await axios.delete(
+      'https://api.themoviedb.org/3/authentication/session',
+      {
+        data: {
+          session_id: sessionId,
+        },
+        params: {
+          api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+        },
+      },
+    );
+    if (response?.status === 200) {
+      return response.data;
+    }
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 const getUserDetails = async (sessionId) => {
   try {
     const response = await axios.get('https://api.themoviedb.org/3/account', {
@@ -60,4 +82,4 @@ const getUserDetails = async (sessionId) => {
     return error;
   }
 };
-export { getAuthToken, signIn, getUserDetails };
+export { getAuthToken, signIn, getUserDetails, signOut };
