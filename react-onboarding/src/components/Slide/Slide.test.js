@@ -2,6 +2,8 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import Slide from './Slide';
 
 const props = {
@@ -10,16 +12,21 @@ const props = {
   overview:
     'A lighthouse keeper and his wife living off the coast of Western Australia raise a baby they rescue from an adrift rowboat.',
   onFocus: jest.fn(),
+  id: 1,
 };
+const mockStore = configureStore();
+const store = mockStore({});
 
 describe('Slide Component', () => {
   test('should render a slide components correctly', () => {
     render(
-      <Slide
-        imageSrc={props.imageSrc}
-        title={props.title}
-        overview={props.overview}
-      />,
+      <Provider store={store}>
+        <Slide
+          imageSrc={props.imageSrc}
+          title={props.title}
+          overview={props.overview}
+        />
+      </Provider>,
     );
     const backgroundImage = screen.getByAltText(props.title);
     expect(backgroundImage).toHaveAttribute('src', props.imageSrc);
@@ -33,9 +40,10 @@ describe('Slide Component', () => {
         imageSrc={props.imageSrc}
         title={props.title}
         overview={props.overview}
+        id={props.id}
       />,
     );
-    const container = screen.getByTestId('slide-container');
+    const container = screen.getByTestId(`slide-${props.id}`);
     userEvent.hover(container);
     expect(props.onFocus).not.toHaveBeenCalled();
   });
@@ -47,9 +55,10 @@ describe('Slide Component', () => {
         title={props.title}
         overview={props.overview}
         onFocus={props.onFocus}
+        id={props.id}
       />,
     );
-    const container = screen.getByTestId('slide-container');
+    const container = screen.getByTestId(`slide-${props.id}`);
     userEvent.hover(container);
     expect(props.onFocus).toHaveBeenCalledTimes(1);
   });

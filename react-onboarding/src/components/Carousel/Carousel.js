@@ -125,6 +125,7 @@ const Carousel = ({
         {/* Control ends */}
         {/* Carousel begins */}
         <div
+          data-cy={`${title.replace(/\s/g, '')}-carousel`}
           ref={carousel}
           className={`relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pr-[60px] ${className}`}
         >
@@ -141,6 +142,7 @@ const Carousel = ({
                 />
               )}
               <SlideComponent
+                id={slide.id}
                 title={slide.title}
                 imageSrc={`${BASE_URL}${slide.poster_path}`}
                 genres={slide.genres}
@@ -154,6 +156,7 @@ const Carousel = ({
                 noAnimatedClassName={`${
                   slide === selectedMovie && 'border-4 border-white box-content'
                 }`}
+                rating={slide.vote_average}
               />
             </div>
           ))}

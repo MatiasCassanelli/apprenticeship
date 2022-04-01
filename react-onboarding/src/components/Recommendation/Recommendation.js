@@ -91,6 +91,7 @@ const Recommendation = ({ movie, onClose }) => {
               overview={movie.overview}
               genres={movie.genres}
               id={movie.id}
+              rating={movie.vote_average}
               className={`${
                 selectedSection === 'overview'
                   ? styles.horizontalShow
@@ -164,6 +165,7 @@ Recommendation.propTypes = {
     overview: T.string,
     genres: T.arrayOf(T.string),
     id: T.number,
+    vote_average: T.number,
   }),
   onClose: T.func,
 };

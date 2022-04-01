@@ -37,7 +37,10 @@ const UpcomingMovie = ({ movie }) => {
   }, [movie]);
 
   return (
-    <div className="h-[800px] lg:h-[600px] w-full relative">
+    <div
+      className="h-[800px] lg:h-[600px] w-full relative"
+      data-testid="upcoming"
+    >
       <div className={styles.topGradient} />
       <img
         className="h-full w-full object-cover"

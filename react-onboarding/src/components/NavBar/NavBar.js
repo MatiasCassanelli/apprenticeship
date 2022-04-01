@@ -10,6 +10,7 @@ const NavBar = ({ className }) => {
 
   return (
     <nav
+      data-testid="nav-bar"
       className={`${className} nav-bar absolute w-full flex flex-wrap items-center justify-between py-3 text-gray-200 navbar navbar-expand-lg`}
     >
       <div className="container-fluid w-full flex flex-wrap items-center justify-between">

@@ -1,8 +1,9 @@
 import React from 'react';
 import T from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import StarRating from '../StarRating/StarRating';
 
-const Overview = ({ overview, genres, id, className }) => {
+const Overview = ({ overview, genres, id, className, rating }) => {
   const navigate = useNavigate();
   const onTrailerClick = () => {
     navigate(`/trailer/${id}`);
@@ -10,33 +11,7 @@ const Overview = ({ overview, genres, id, className }) => {
   return (
     <div className={className}>
       <div className="flex gap-[34px] mb-[32px]">
-        <div className="flex items-center">
-          <img
-            className="w-[17px] h-[16px]"
-            src="/images/round-star.png"
-            alt=""
-          />
-          <img
-            className="w-[17px] h-[16px]"
-            src="/images/round-star.png"
-            alt=""
-          />
-          <img
-            className="w-[17px] h-[16px]"
-            src="/images/round-star.png"
-            alt=""
-          />
-          <img
-            className="w-[17px] h-[16px]"
-            src="/images/round-star.png"
-            alt=""
-          />
-          <img
-            className="w-[17px] h-[16px]"
-            src="/images/round-star_half.png"
-            alt=""
-          />
-        </div>
+        <StarRating rating={rating} starClassName="w-[17px] h-[16px]" />
         <div className="float-right rounded-full px-3 py-1 w-fit border border-solid border-white text-[8.5px] lg:text-[14px] leading-[10px] lg:leading-[16px]">
           PG-13
         </div>
@@ -86,6 +61,7 @@ Overview.propTypes = {
   genres: T.arrayOf(T.string),
   className: T.string,
   id: T.number,
+  rating: T.number,
 };
 
 Overview.defaultProps = {
@@ -93,4 +69,5 @@ Overview.defaultProps = {
   genres: [],
   className: '',
   id: '',
+  rating: 0,
 };
