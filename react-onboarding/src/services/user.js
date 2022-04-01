@@ -75,6 +75,7 @@ const getUserDetails = async (sessionId) => {
       },
     });
     if (response?.status === 200) {
+      localStorage.setItem('user', JSON.stringify(response.data));
       return response.data;
     }
     return response;
@@ -82,4 +83,5 @@ const getUserDetails = async (sessionId) => {
     return error;
   }
 };
+
 export { getAuthToken, signIn, getUserDetails, signOut };

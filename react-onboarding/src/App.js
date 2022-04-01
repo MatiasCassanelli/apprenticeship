@@ -4,6 +4,7 @@ import useAuth from './hooks/useAuth';
 import getCookie from './utils/getCookie';
 import Home from './views/Home/Home';
 import Login from './views/Login/Login';
+import Profile from './views/Profile/Profile';
 import VideoPlayer from './views/VIdeoPlayer/VideoPlayer';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
       <Route path="/login/redirect" element={<Login redirected />} />
       <Route path="/login" element={<Login />} />
       <Route path="/trailer/:id" element={<VideoPlayer />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };
