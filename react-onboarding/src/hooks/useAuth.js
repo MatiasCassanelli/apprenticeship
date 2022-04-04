@@ -15,7 +15,6 @@ import {
   getIsAuthenticated,
   getUserDetails as userDetailsSelector,
 } from '../redux/user/selectors';
-import getCookie from '../utils/getCookie';
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -32,21 +31,23 @@ const useAuth = () => {
       ...details,
     };
     dispatch(setUserDetails(finalUser));
+    navigate('/');
   };
-  const signIn = async (reqToken) => {
-    const savedSessionId = getCookie('sessionId');
-    if (!savedSessionId) {
+  const signIn = async ({ reqToken, session }) => {
+    if (session) {
+      dispatch(setSessionId(session));
+      userDetailsDispatcher(session);
+    } else {
       const res = await userSignIn(reqToken);
       if (res?.success) {
         dispatch(setSessionId(res.session_id));
-        document.cookie = `sessionId=${res.session_id}`;
-        userDetailsDispatcher(sessionId);
-        navigate('/');
+        const expires = new Date();
+        expires.setTime(expires.getTime() + 60 * 60 * 1000);
+        document.cookie = `sessionId=${
+          res.session_id
+        }; expires=${expires.toUTCString()}; path=/`;
+        userDetailsDispatcher(res.session_id);
       }
-    } else {
-      dispatch(setSessionId(savedSessionId));
-      userDetailsDispatcher(savedSessionId);
-      navigate('/');
     }
   };
 
@@ -55,6 +56,8 @@ const useAuth = () => {
     if (res?.success) {
       dispatch(deleteSession());
       document.cookie = `sessionId=`;
+      document.cookie = `reqToken=`;
+      localStorage.clear();
     }
   };
 

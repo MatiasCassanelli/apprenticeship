@@ -15,6 +15,9 @@ const Login = ({ redirected }) => {
 
   useEffect(() => {
     if (redirected && approved === 'true') {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 60 * 60 * 1000);
+      document.cookie = `reqToken=${requestToken}; expires=${expires.toUTCString()}; path=/`;
       signIn(requestToken);
     }
   }, [redirected]);

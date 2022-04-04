@@ -13,9 +13,8 @@ const getAuthToken = async () => {
     if (response.status === 200) {
       const d = new Date();
       d.setTime(d.getTime() + 60 * 60 * 1000);
-      document.cookie = `reqToken=${response.data.request_token}; 'expires='${d}`;
+      window.location.href = `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=http://localhost:3000/login/redirect`;
     }
-    window.location.href = `https://www.themoviedb.org/authenticate/${response.data.request_token}?redirect_to=http://localhost:3000/login/redirect`;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
