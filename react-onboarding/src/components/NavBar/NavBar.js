@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const NavBar = ({ showOnlyLogo, className }) => {
-  const { isAuthenticated, userDetails, signOut } = useAuth();
+  const { isAuthenticated, userDetails } = useAuth();
   return (
     <nav
       data-testid="nav-bar"
@@ -107,9 +107,11 @@ const NavBar = ({ showOnlyLogo, className }) => {
                             My Profile
                           </li>
                         </Link>
-                        <li className="cursor-pointer dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
-                          <div onClick={signOut}>Log out</div>
-                        </li>
+                        <Link to="/login">
+                          <li className="cursor-pointer dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                            Log out
+                          </li>
+                        </Link>
                       </ul>
                     </div>
                   </div>
