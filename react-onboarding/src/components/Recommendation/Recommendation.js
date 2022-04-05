@@ -9,6 +9,7 @@ import Details from './Details';
 import { setRecommendation } from '../../redux/movies/actions';
 import { getRecommendation } from '../../redux/movies/selectors';
 import getImageUrl from '../../utils/getImageUrl';
+import useFavourite from '../../hooks/useFavourite';
 
 const Recommendation = ({ movie, onClose }) => {
   const [selectedSection, setSelectedSection] = useState('overview');
@@ -17,6 +18,7 @@ const Recommendation = ({ movie, onClose }) => {
   const [isMounted, setIsMounted] = useState(false);
   const dispatch = useDispatch();
   const recommendation = useSelector(getRecommendation);
+  const { handleFavourite, isFavourite } = useFavourite();
 
   useEffect(() => {
     setIsMounted(true);
@@ -96,6 +98,8 @@ const Recommendation = ({ movie, onClose }) => {
                   ? styles.horizontalShow
                   : styles.horizontalHide
               }`}
+              onMarkClick={() => handleFavourite(movie)}
+              isFavourite={isFavourite(movie.id)}
             />
             <MoreLikeThis
               title={movie.title}

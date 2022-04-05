@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import T from 'prop-types';
 import styles from './slide.module.scss';
@@ -13,6 +14,8 @@ const AnimatedSlide = ({
   rating,
   shouldAnimateOnHover,
   noAnimatedClassName,
+  onMarkClick,
+  isFavourite,
 }) => (
   <div className="h-[180px] lg:h-[303px] flex items-center">
     <div
@@ -34,11 +37,25 @@ const AnimatedSlide = ({
         >
           <div className="flex">
             <div className="flex flex-1 items-center">
-              <img
-                src="/images/mark.png"
-                className="w-[14px] h-[18px] lg:w-[22px] lg:h-[28px] mr-3"
-                alt=""
-              />
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onMarkClick();
+                }}
+              >
+                {isFavourite ? (
+                  <div className="mr-1 flex items-center rating rounded-full px-3 py-1 w-fit border border-solid border-blue text-[8.5px] lg:text-[14px] leading-[10px] lg:leading-[16px] opacity-[0.51]">
+                    Fav Movie
+                  </div>
+                ) : (
+                  <img
+                    src="/images/mark.png"
+                    className="w-[14px] h-[18px] lg:w-[22px] lg:h-[28px] mr-3"
+                    alt=""
+                  />
+                )}
+              </div>
+
               <img
                 src="/images/share.png"
                 className="w-[14.5px] h-[15px]lg:w-[23px] lg:h-[25px]"
@@ -94,6 +111,8 @@ AnimatedSlide.propTypes = {
   noAnimatedClassName: T.string,
   rating: T.number,
   id: T.number,
+  onMarkClick: T.func,
+  isFavourite: T.bool,
 };
 
 AnimatedSlide.defaultProps = {
@@ -106,4 +125,6 @@ AnimatedSlide.defaultProps = {
   noAnimatedClassName: '',
   rating: 0,
   id: '',
+  onMarkClick: () => {},
+  isFavourite: false,
 };

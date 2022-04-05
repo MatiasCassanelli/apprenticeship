@@ -4,6 +4,7 @@ import AnimatedSlide from '../Slide/AnimatedSlide';
 import VerticalAnimatedSlide from '../Slide/VerticalAnimatedSlide';
 import Slide from '../Slide/Slide';
 import getImageUrl from '../../utils/getImageUrl';
+import useFavourite from '../../hooks/useFavourite';
 
 const Carousel = ({
   slides,
@@ -22,6 +23,7 @@ const Carousel = ({
   const [maxScrollWidth, setMaxScrollWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedMovie, setSelectedMovie] = useState();
+  const { handleFavourite, isFavourite } = useFavourite();
 
   if (type === 'horizontal') {
     slideWidth = 270;
@@ -156,6 +158,8 @@ const Carousel = ({
                   slide === selectedMovie && 'border-4 border-white box-content'
                 }`}
                 rating={slide.vote_average}
+                onMarkClick={() => handleFavourite(slide)}
+                isFavourite={isFavourite(slide.id)}
               />
             </div>
           ))}

@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import styles from './hero.module.scss';
 import StarRating from '../StarRating/StarRating';
 import getImageUrl from '../../utils/getImageUrl';
+import useFavourite from '../../hooks/useFavourite';
 
 const Hero = ({ movie }) => {
+  const { handleFavourite, isFavourite } = useFavourite();
   const navigate = useNavigate();
   const onTrailerClick = () => {
     navigate(`/trailer/${movie.id}`);
@@ -66,19 +68,21 @@ const Hero = ({ movie }) => {
         </p>
 
         <div className="flex items-center w-full flex-col lg:flex-row gap-2 lg:gap-[60px]">
-          <div className="flex items-center justify-between w-full lg:w-auto lg:gap-[60px]">
-            <div className="flex items-center">
+          <div className="flex items-center justify-between w-full lg:w-auto lg:gap-[60px] cursor-pointer">
+            <div
+              className="flex items-center bg-[#D8D8D8]/[.3] px-2"
+              onClick={() => handleFavourite(movie)}
+            >
               <img
                 src="/images/mark-hero.png"
                 alt=""
                 className="w-[14px] h-[18px] mr-4"
               />
-              <p className="text-[18px] text-[#92AAD7]">Watch Later</p>
+              <p className="text-[18px] text-[#92AAD7]">
+                {isFavourite(movie.id) ? 'Added to Watch Later' : 'Watch Later'}
+              </p>
             </div>
-            <div
-              className="flex items-center cursor-pointer"
-              onClick={onTrailerClick}
-            >
+            <div className="flex items-center" onClick={onTrailerClick}>
               <img
                 src="/images/play-hero.png"
                 alt=""

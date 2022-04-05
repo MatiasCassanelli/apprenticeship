@@ -16,6 +16,7 @@ import RecommendationCarousel from '../../components/Carousel/RecommendationCaro
 import UpcomingMovie from '../../components/UpcomingMovie/UpcomingMovie';
 import { setMovies } from '../../redux/movies/actions';
 import { getMovies } from '../../redux/movies/selectors';
+import useFavourite from '../../hooks/useFavourite';
 
 const Home = () => {
   const [popularFilms, setPopularFilms] = useState();
@@ -23,6 +24,7 @@ const Home = () => {
   const [nowPlayingFilms, setNowPlayingFilms] = useState();
   const [upcomingFilms, setUpcomingFilms] = useState();
   const [latestFilm, setLatestFilm] = useState();
+  const { favourites, getFavouriteMovies } = useFavourite();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const movies = useSelector(getMovies);
@@ -86,6 +88,7 @@ const Home = () => {
     } else {
       setPreSavedMovies();
     }
+    getFavouriteMovies();
   }, []);
 
   const onMovieClick = (movieId) => {
@@ -96,6 +99,15 @@ const Home = () => {
     <div className="relative">
       <NavBar />
       {latestFilm && <Hero movie={latestFilm} onTrailerClick={onMovieClick} />}
+      {favourites?.length && (
+        <div className="py-3 pl-4 md:pl-[63px]">
+          <Carousel
+            slides={favourites}
+            title="My List"
+            onSlideClick={onMovieClick}
+          />
+        </div>
+      )}
       <div className="py-3 pl-4 md:pl-[63px]">
         {popularFilms?.length && (
           <Carousel

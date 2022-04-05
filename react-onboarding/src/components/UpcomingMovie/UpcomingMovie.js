@@ -6,12 +6,14 @@ import { setTrailer } from '../../redux/movies/actions';
 import { getTrailer } from '../../redux/movies/selectors';
 import styles from './upcomingMovie.module.scss';
 import getImageUrl from '../../utils/getImageUrl';
+import useFavourite from '../../hooks/useFavourite';
 
 const UpcomingMovie = ({ movie }) => {
   const [videoSrc, setVideoSrc] = useState('');
   const [releaseDate, setReleaseData] = useState('');
   const dispatch = useDispatch();
   const trailer = useSelector(getTrailer);
+  const { handleFavourite, isFavourite } = useFavourite();
 
   useEffect(() => {
     const date = new Date(movie.release_date);
@@ -68,13 +70,18 @@ const UpcomingMovie = ({ movie }) => {
             {movie.title}
           </p>
           <div className="flex w-full items-center gap-[127px] mb-[14px]">
-            <div className="flex items-center h-[48px] bg-[#D8D8D8]/[.3] w-[150px] justify-center">
+            <div
+              className="flex items-center h-[48px] bg-[#D8D8D8]/[.3] w-[150px] justify-center cursor-pointer px-2"
+              onClick={() => handleFavourite(movie)}
+            >
               <img
                 src="/images/mark-hero.png"
                 alt=""
                 className="w-[14px] h-[18px] mr-4"
               />
-              <p className="text-[18px] text-[#92AAD7]">Watch Later</p>
+              <p className="text-[18px] text-[#92AAD7]">
+                {isFavourite(movie.id) ? 'Added to Watch Later' : 'Watch Later'}
+              </p>
             </div>
             <div className="flex">
               <div className="flex">
