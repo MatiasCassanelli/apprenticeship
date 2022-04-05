@@ -4,7 +4,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const YOUTUBE_URL = 'https://www.youtube.com/embed/';
 
 const populateGenres = (movies, genres) =>
-  movies.map((movie) => {
+  movies?.map((movie) => {
     const populatedGenres = movie.genre_ids?.map((id) => {
       const genre = genres.find((g) => id === g.id);
       return genre?.name;
@@ -15,11 +15,12 @@ const populateGenres = (movies, genres) =>
     };
   });
 
-const getMovies = async (url) => {
+const getMovies = async (url, extraParams) => {
   try {
     const moviePromise = axios.get(url, {
       params: {
         api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+        ...extraParams,
       },
     });
     const genrePromise = axios.get(`${BASE_URL}/genre/movie/list`, {
@@ -161,6 +162,51 @@ const getVideoUrl = async (movieId) => {
   }
 };
 
+const getFavouriteMovies = async (accountId, sessionId) => {
+  try {
+    const data = await getMovies(
+      `${BASE_URL}/account/${accountId}/favorite/movies`,
+      { session_id: sessionId },
+    );
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const addToFavourites = async (
+  accountId,
+  sessionId,
+  mediaId,
+  favorite = true,
+) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/account/${accountId}/favorite`,
+      {
+        media_type: 'movie',
+        media_id: mediaId,
+        favorite,
+      },
+      {
+        params: {
+          api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+          session_id: sessionId,
+        },
+      },
+    );
+    if (response?.data) {
+      return response.data.success;
+    }
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export {
   getPopularMovies,
   getTopRated,
@@ -170,4 +216,6 @@ export {
   getRelatedMovies,
   getCredits,
   getVideoUrl,
+  getFavouriteMovies,
+  addToFavourites,
 };
