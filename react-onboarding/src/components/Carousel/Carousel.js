@@ -85,6 +85,16 @@ const Carousel = ({
     );
   }, []);
 
+  const getJustifyClass = () => {
+    if (isDisabled('prev')) {
+      return 'justify-end';
+    }
+    if (isDisabled('next')) {
+      return 'justify-start';
+    }
+    return 'justify-between';
+  };
+
   return slides.length ? (
     <div
       className="carousel mx-auto mb-6 lg:my-1.5 relative"
@@ -95,33 +105,37 @@ const Carousel = ({
       </h2>
       <div className="relative overflow-hidden">
         {/* Control begins */}
-        <div className="flex justify-between absolute top left w-full h-full">
-          <button
-            data-testid="prev-button"
-            type="button"
-            onClick={movePrev}
-            className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-            disabled={isDisabled('prev')}
-          >
-            <span
-              className="carousel-control-prev-icon inline-block bg-no-repeat"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            data-testid="next-button"
-            type="button"
-            onClick={moveNext}
-            className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-            disabled={isDisabled('next')}
-          >
-            <span
-              className="carousel-control-next-icon inline-block bg-no-repeat"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Next</span>
-          </button>
+        <div
+          className={`flex ${getJustifyClass()} absolute top left w-full h-full`}
+        >
+          {!isDisabled('prev') && (
+            <button
+              data-testid="prev-button"
+              type="button"
+              onClick={movePrev}
+              className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
+            >
+              <span
+                className="carousel-control-prev-icon inline-block bg-no-repeat"
+                aria-hidden="true"
+              />
+              <span className="visually-hidden">Previous</span>
+            </button>
+          )}
+          {!isDisabled('next') && (
+            <button
+              data-testid="next-button"
+              type="button"
+              onClick={moveNext}
+              className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
+            >
+              <span
+                className="carousel-control-next-icon inline-block bg-no-repeat"
+                aria-hidden="true"
+              />
+              <span className="visually-hidden">Next</span>
+            </button>
+          )}
         </div>
         {/* Control ends */}
         {/* Carousel begins */}
