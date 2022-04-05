@@ -20,7 +20,7 @@ const NavBar = ({ showOnlyLogo, className }) => {
       );
     }
     return (
-      <div className="bg-[#f2f2f2] rounded-full">
+      <div className="bg-[#f2f2f2] rounded-full mr-[20px]">
         <img
           id="profile"
           src="/images/profile.png"
