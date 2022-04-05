@@ -4,9 +4,33 @@ import 'tw-elements';
 import './navBar.scss';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import getImageUrl from '../../utils/getImageUrl';
 
 const NavBar = ({ showOnlyLogo, className }) => {
   const { isAuthenticated, userDetails } = useAuth();
+  const getProfileImage = () => {
+    if (userDetails?.avatar) {
+      return (
+        <img
+          id="profile"
+          src={getImageUrl(userDetails?.avatar?.tmdb?.avatar_path)}
+          alt=""
+          className="border border-solid border-[#0578FF] rounded-full object-cover w-[28px] h-[28px] mr-[20px]"
+        />
+      );
+    }
+    return (
+      <div className="bg-[#f2f2f2] rounded-full">
+        <img
+          id="profile"
+          src="/images/profile.png"
+          className="w-[28px] h-[28px]"
+          alt=""
+        />
+      </div>
+    );
+  };
+
   return (
     <nav
       data-testid="nav-bar"
@@ -66,12 +90,7 @@ const NavBar = ({ showOnlyLogo, className }) => {
               </div>
               <div className="profile-menu order-2 lg:order-3">
                 <img id="search" src="/images/search.png" alt="" />
-                <img
-                  id="profile"
-                  src={`https://image.tmdb.org/t/p/w200${userDetails?.avatar?.tmdb?.avatar_path}`}
-                  alt=""
-                  className="border border-solid border-[#0578FF] rounded-full object-cover"
-                />
+                {getProfileImage()}
                 <div className="flex justify-center">
                   <div>
                     <div className="dropstart relative">

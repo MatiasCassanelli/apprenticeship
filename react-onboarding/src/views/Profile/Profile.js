@@ -30,6 +30,28 @@ const Profile = () => {
     }, 1000);
   };
 
+  const getProfileImage = () => {
+    if (userDetails?.avatar) {
+      return (
+        <img
+          src={getImageUrl(userDetails?.avatar?.tmdb?.avatar_path)}
+          alt=""
+          className="w-[165px] h-[165px] rounded mr-[84px] mb-6"
+        />
+      );
+    }
+    return (
+      <div className="bg-[#f2f2f2] w-[165px] h-[165px] rounded mr-[84px] mb-6 p-[22px]">
+        <img
+          id="profile"
+          src="/images/profile.png"
+          className="w-[120px] h-[120px]"
+          alt=""
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="bg-[#161616] w-full h-full">
       <NavBar className="relative" showOnlyLogo />
@@ -39,11 +61,7 @@ const Profile = () => {
         </h2>
         <div className="border border-solid border-[#979797] mb-[40px]" />
         <div className="flex w-full flex-col md:flex-row">
-          <img
-            src={getImageUrl(userDetails?.avatar?.tmdb?.avatar_path)}
-            alt=""
-            className="w-[165px] h-[165px] rounded mr-[84px] mb-6"
-          />
+          {getProfileImage()}
           <form action="" className="flex flex-col flex-1">
             <div className="flex mb-6 gap-4 flex-col md:flex-row">
               <input
