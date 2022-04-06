@@ -31,7 +31,7 @@ const Profile = () => {
   };
 
   const getProfileImage = () => {
-    if (userDetails?.avatar) {
+    if (userDetails?.avatar?.tmdb?.avatar_path) {
       return (
         <img
           src={getImageUrl(userDetails?.avatar?.tmdb?.avatar_path)}

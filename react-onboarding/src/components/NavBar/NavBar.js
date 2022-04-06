@@ -9,7 +9,7 @@ import getImageUrl from '../../utils/getImageUrl';
 const NavBar = ({ showOnlyLogo, className }) => {
   const { isAuthenticated, userDetails } = useAuth();
   const getProfileImage = () => {
-    if (userDetails?.avatar) {
+    if (userDetails?.avatar?.tmdb?.avatar_path) {
       return (
         <img
           id="profile"
