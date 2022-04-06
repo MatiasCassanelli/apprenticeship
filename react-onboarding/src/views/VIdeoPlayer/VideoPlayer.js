@@ -1,11 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import YouTube from 'react-youtube';
+import { setVideoTime } from '../../redux/player/actions';
+import { getPlayerTime } from '../../redux/player/selectors';
 import { getVideoUrl } from '../../services/movies';
 
 const VideoPlayer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [videoSrc, setVideoSrc] = useState('');
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const dispatch = useDispatch();
+  const prevTime = useSelector(getPlayerTime(id));
+
+  const videoRef = useRef();
+  const currentTime = useRef(0);
+
   useEffect(() => {
     getVideoUrl(id).then((videoUrl) => {
       if (videoUrl) {
@@ -13,6 +24,26 @@ const VideoPlayer = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    let intervalId;
+    if (videoPlaying) {
+      intervalId = setInterval(() => {
+        currentTime.current = videoRef.current.getCurrentTime();
+      }, 100);
+    }
+    return () => {
+      clearInterval(intervalId);
+      dispatch(setVideoTime({ [id]: currentTime.current }));
+    };
+  }, [videoPlaying]);
+
+  const onPlayerReady = (e) => {
+    videoRef.current = e.target;
+    if (prevTime) {
+      videoRef.current.seekTo(prevTime);
+    }
+  };
 
   return (
     <div className="relative">
@@ -25,11 +56,19 @@ const VideoPlayer = () => {
         <img src="/images/arrow_back.png" className="w-full h-full" alt="" />
       </button>
       {videoSrc && (
-        // eslint-disable-next-line jsx-a11y/iframe-has-title
-        <iframe
-          src={videoSrc}
-          className="w-[100vw] h-[100vh] p-[45px]"
-          allow="fullscreen;"
+        <YouTube
+          videoId={videoSrc}
+          className="w-[100vw] h-[100vh]"
+          onReady={onPlayerReady}
+          onPlay={() => {
+            setVideoPlaying(true);
+          }}
+          onPause={() => {
+            setVideoPlaying(false);
+          }}
+          onEnd={() => {
+            setVideoPlaying(false);
+          }}
         />
       )}
     </div>

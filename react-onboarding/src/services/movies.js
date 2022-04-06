@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
-const YOUTUBE_URL = 'https://www.youtube.com/embed/';
 
 const populateGenres = (movies, genres) =>
   movies?.map((movie) => {
@@ -153,7 +152,7 @@ const getVideoUrl = async (movieId) => {
         (x) => x.type === 'Trailer' && x.site === 'YouTube',
       );
       if (trailer) {
-        return `${YOUTUBE_URL}${trailer.key}`;
+        return trailer.key;
       }
     }
     return '';
