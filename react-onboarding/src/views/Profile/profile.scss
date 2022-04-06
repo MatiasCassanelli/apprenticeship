@@ -1,0 +1,27 @@
+.input {
+  box-sizing: border-box;
+  background-color: #000000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.custom-select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 24px;
+  margin-right: 40px;
+  font-size: 18px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: url('../../../public/images/arrow-down-filled.png');
+  top: 50%;
+  right: 21px;
+  position: absolute;
+  transform: translateY(-50%);
+}

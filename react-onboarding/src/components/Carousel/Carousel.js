@@ -3,8 +3,7 @@ import T from 'prop-types';
 import AnimatedSlide from '../Slide/AnimatedSlide';
 import VerticalAnimatedSlide from '../Slide/VerticalAnimatedSlide';
 import Slide from '../Slide/Slide';
-
-const BASE_URL = 'https://image.tmdb.org/t/p/w300';
+import getImageUrl from '../../utils/getImageUrl';
 
 const Carousel = ({
   slides,
@@ -144,7 +143,7 @@ const Carousel = ({
               <SlideComponent
                 id={slide.id}
                 title={slide.title}
-                imageSrc={`${BASE_URL}${slide.poster_path}`}
+                imageSrc={getImageUrl(slide.poster_path)}
                 genres={slide.genres}
                 overview={slide.overview}
                 onFocus={() => {
