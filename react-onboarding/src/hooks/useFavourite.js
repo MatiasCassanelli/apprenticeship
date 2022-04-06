@@ -3,8 +3,8 @@ import {
   addFavourite,
   removeFavourite,
   setFavourites,
-} from '../redux/favourites/actions';
-import { getFavourites } from '../redux/favourites/selectors';
+} from '../redux/userLists/actions';
+import { getFavourites } from '../redux/userLists/selectors';
 import { getSessionId, getUserDetails } from '../redux/user/selectors';
 import * as movieService from '../services/movies';
 

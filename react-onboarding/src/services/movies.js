@@ -206,6 +206,46 @@ const addToFavourites = async (
   }
 };
 
+const getWatchList = async (accountId, sessionId) => {
+  try {
+    const data = await getMovies(
+      `${BASE_URL}/account/${accountId}/watchlist/movies`,
+      { session_id: sessionId },
+    );
+    if (data.ok) {
+      return populateGenres(data.movies, data.genres);
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const addToWatchList = async (accountId, sessionId, mediaId, adding = true) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/account/${accountId}/watchlist`,
+      {
+        media_type: 'movie',
+        media_id: mediaId,
+        watchlist: adding,
+      },
+      {
+        params: {
+          api_key: process.env.REACT_APP_FILM_DB_API_KEY,
+          session_id: sessionId,
+        },
+      },
+    );
+    if (response?.data) {
+      return response.data.success;
+    }
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export {
   getPopularMovies,
   getTopRated,
@@ -217,4 +257,6 @@ export {
   getVideoUrl,
   getFavouriteMovies,
   addToFavourites,
+  getWatchList,
+  addToWatchList,
 };
