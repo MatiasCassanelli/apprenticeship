@@ -16,7 +16,11 @@ const mockMovie = {
   id: 283552,
 };
 const mockStore = configureStore();
-const store = mockStore({ movies: {} });
+const store = mockStore({
+  movies: {},
+  user: { userDetails: {} },
+  favourites: {},
+});
 
 test('should render dynamic movie data', () => {
   const date = new Date(mockMovie.release_date);

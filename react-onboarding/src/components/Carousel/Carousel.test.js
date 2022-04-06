@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import Carousel from './Carousel';
 
 const slides = [
@@ -37,11 +39,27 @@ const slides = [
     genres: ['genre1', 'genre2'],
     id: 4,
   },
+  {
+    poster_path: '/poster_path5.jpg',
+    release_date: 'date5',
+    title: 'title5',
+    overview: 'overview5',
+    genres: ['genre1', 'genre2'],
+    id: 5,
+  },
 ];
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useRef: jest.fn(),
 }));
+
+const mockStore = configureStore();
+const store = mockStore({
+  movies: {},
+  user: { userDetails: {} },
+  favourites: {},
+});
+
 describe('Carousel', () => {
   test('should render nothing because slides prop is empty', () => {
     useRef.mockImplementation(() => ({
@@ -50,7 +68,11 @@ describe('Carousel', () => {
         clientWidth: 1200,
       },
     }));
-    render(<Carousel slides={[]} />);
+    render(
+      <Provider store={store}>
+        <Carousel slides={[]} />
+      </Provider>,
+    );
     const prevButton = screen.queryByTestId('prev-button');
     const nextButton = screen.queryByTestId('next-button');
     expect(prevButton).not.toBeInTheDocument();
@@ -63,11 +85,15 @@ describe('Carousel', () => {
         clientWidth: 1200,
       },
     }));
-    render(<Carousel slides={slides.slice(0, 2)} />);
-    const prevButton = screen.getByTestId('prev-button');
-    const nextButton = screen.getByTestId('next-button');
-    expect(prevButton).toBeDisabled();
-    expect(nextButton).toBeDisabled();
+    render(
+      <Provider store={store}>
+        <Carousel slides={slides.slice(0, 2)} />
+      </Provider>,
+    );
+    const prevButton = screen.queryByTestId('prev-button');
+    const nextButton = screen.queryByTestId('next-button');
+    expect(prevButton).not.toBeInTheDocument();
+    expect(nextButton).not.toBeInTheDocument();
   });
   test('should render the next button enabled because carousel is larger than screen', () => {
     useRef.mockImplementation(() => ({
@@ -76,11 +102,15 @@ describe('Carousel', () => {
         clientWidth: 800,
       },
     }));
-    render(<Carousel slides={slides} />);
-    const prevButton = screen.getByTestId('prev-button');
-    const nextButton = screen.getByTestId('next-button');
-    expect(nextButton).toBeEnabled();
-    expect(prevButton).toBeDisabled();
+    render(
+      <Provider store={store}>
+        <Carousel slides={slides} />
+      </Provider>,
+    );
+    const prevButton = screen.queryByTestId('prev-button');
+    const nextButton = screen.queryByTestId('next-button');
+    expect(prevButton).not.toBeInTheDocument();
+    expect(nextButton).toBeInTheDocument();
   });
   test('should disable previous button when reach the initial slide', async () => {
     useRef.mockImplementation(() => ({
@@ -89,13 +119,18 @@ describe('Carousel', () => {
         clientWidth: 800,
       },
     }));
-    render(<Carousel slides={slides} />);
-    const prevButton = screen.getByTestId('prev-button');
-    const nextButton = screen.getByTestId('next-button');
-    expect(prevButton).toBeDisabled();
+    render(
+      <Provider store={store}>
+        <Carousel slides={slides} />
+      </Provider>,
+    );
+    const nextButton = screen.queryByTestId('next-button');
+    expect(screen.queryByTestId('prev-button')).not.toBeInTheDocument();
     userEvent.click(nextButton);
+    const prevButton = screen.queryByTestId('prev-button');
+    expect(prevButton).toBeInTheDocument();
     expect(prevButton).toBeEnabled();
     userEvent.click(prevButton);
-    expect(prevButton).toBeDisabled();
+    expect(prevButton).not.toBeInTheDocument();
   });
 });
