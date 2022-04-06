@@ -1,8 +1,9 @@
 import React from 'react';
+import T from 'prop-types';
 
-const Footer = () => (
+const Footer = ({ className }) => (
   <div
-    className="px-[75px] pb-[50px] lg:px-[150px] lg:pb-[100px]"
+    className={`px-[75px] pb-[50px] lg:px-[150px] lg:pb-[100px] ${className}`}
     data-testid="footer"
   >
     <h2 className="font-medium leading-tight text-2xl mb-[54px]">
@@ -26,3 +27,11 @@ const Footer = () => (
 );
 
 export default Footer;
+
+Footer.propTypes = {
+  className: T.string,
+};
+
+Footer.defaultProps = {
+  className: '',
+};

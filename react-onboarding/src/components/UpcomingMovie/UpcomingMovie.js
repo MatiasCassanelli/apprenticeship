@@ -5,8 +5,7 @@ import { getVideoUrl } from '../../services/movies';
 import { setTrailer } from '../../redux/movies/actions';
 import { getTrailer } from '../../redux/movies/selectors';
 import styles from './upcomingMovie.module.scss';
-
-const BASE_URL = 'https://image.tmdb.org/t/p/w780';
+import getImageUrl from '../../utils/getImageUrl';
 
 const UpcomingMovie = ({ movie }) => {
   const [videoSrc, setVideoSrc] = useState('');
@@ -44,7 +43,7 @@ const UpcomingMovie = ({ movie }) => {
       <div className={styles.topGradient} />
       <img
         className="h-full w-full object-cover"
-        src={`${BASE_URL}${movie.poster_path}`}
+        src={getImageUrl(movie.poster_path, 780)}
         alt=""
       />
       <div className={styles.bottomGradient} />

@@ -3,8 +3,8 @@ import T from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import styles from './hero.module.scss';
 import StarRating from '../StarRating/StarRating';
+import getImageUrl from '../../utils/getImageUrl';
 
-const BASE_URL = 'https://image.tmdb.org/t/p/w1280';
 const Hero = ({ movie }) => {
   const navigate = useNavigate();
   const onTrailerClick = () => {
@@ -20,7 +20,7 @@ const Hero = ({ movie }) => {
       {movie.poster_path ? (
         <img
           className="h-full w-full object-cover"
-          src={`${BASE_URL}${movie.poster_path}`}
+          src={getImageUrl(movie.poster_path, 1280)}
           alt=""
         />
       ) : (

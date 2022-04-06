@@ -8,8 +8,7 @@ import MoreLikeThis from './MoreLikeThis';
 import Details from './Details';
 import { setRecommendation } from '../../redux/movies/actions';
 import { getRecommendation } from '../../redux/movies/selectors';
-
-const BASE_URL = 'https://image.tmdb.org/t/p/w300';
+import getImageUrl from '../../utils/getImageUrl';
 
 const Recommendation = ({ movie, onClose }) => {
   const [selectedSection, setSelectedSection] = useState('overview');
@@ -59,7 +58,7 @@ const Recommendation = ({ movie, onClose }) => {
       >
         <div className={styles.gradient} />
         <img
-          src={`${BASE_URL}${movie.poster_path}`}
+          src={getImageUrl(movie.poster_path)}
           className="h-full w-full object-cover"
           alt=""
         />
