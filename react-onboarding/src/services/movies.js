@@ -152,10 +152,40 @@ const getVideoUrl = async (movieId) => {
         (x) => x.type === 'Trailer' && x.site === 'YouTube',
       );
       if (trailer) {
-        return trailer.key;
+        return `${YOUTUBE_URL}${trailer.key}`;
       }
     }
     return '';
+  } catch (error) {
+    return error;
+  }
+};
+
+const getMovieDetails = async (movieId) => {
+  try {
+    const data = await getMovies(`${BASE_URL}/movie/${movieId}`, {
+      append_to_response: 'videos',
+    });
+    if (data.ok) {
+      const {
+        videos: { results },
+        genres
+      } = data.movies || {};
+      if (results.length) {
+        const trailer = results.find(
+          (x) => x.type === 'Trailer' && x.site === 'YouTube',
+        );
+        if (trailer) {
+          return {
+            ...data.movies,
+            genres: genres.map(x => x.name),
+            trailerKey: trailer.key,
+          };
+        }
+      }
+      return data.movies;
+    }
+    return data;
   } catch (error) {
     return error;
   }

@@ -27,7 +27,9 @@ export default (state = {}, { type, payload }) => {
     case ADD_WATCHLIST:
       return {
         ...state,
-        watchList: [...state.watchList, payload],
+        watchList: state.watchList.find((x) => x.id === payload.id)
+          ? state.watchList
+          : [...state.watchList, payload],
       };
     case SET_WATCHLIST:
       return {
