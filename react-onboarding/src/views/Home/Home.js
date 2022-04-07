@@ -11,6 +11,7 @@ import {
   getNowPlaying,
   getUpcoming,
   getLatest,
+  getGenres,
 } from '../../services/movies';
 import RecommendationCarousel from '../../components/Carousel/RecommendationCarousel';
 import UpcomingMovie from '../../components/UpcomingMovie/UpcomingMovie';
@@ -37,55 +38,57 @@ const Home = () => {
     setTopRatedFilms(topRated);
     setNowPlayingFilms(nowPlaying);
     setUpcomingFilms(upcoming);
-    setLatestFilm(latest[0]);
+    setLatestFilm(latest?.[0]);
   };
 
   useEffect(() => {
     if (movies && Object.keys(movies).length === 0) {
-      getPopularMovies().then((res) => {
-        setPopularFilms(res);
-        dispatch(
-          setMovies({
-            category: 'popular',
-            movies: res,
-          }),
-        );
-      });
-      getTopRated().then((res) => {
-        setTopRatedFilms(res);
-        dispatch(
-          setMovies({
-            category: 'topRated',
-            movies: res,
-          }),
-        );
-      });
-      getNowPlaying().then((res) => {
-        setNowPlayingFilms(res);
-        dispatch(
-          setMovies({
-            category: 'nowPlaying',
-            movies: res,
-          }),
-        );
-      });
-      getUpcoming().then((res) => {
-        setUpcomingFilms(res);
-        dispatch(
-          setMovies({
-            category: 'upcoming',
-            movies: res,
-          }),
-        );
-      });
-      getLatest().then((res) => {
-        setLatestFilm(res);
-        dispatch(
-          setMovies({
-            category: 'latest',
-            movies: res,
-          }),
-        );
+      getGenres().then(() => {
+        getPopularMovies().then((res) => {
+          setPopularFilms(res);
+          dispatch(
+            setMovies({
+              category: 'popular',
+              movies: res,
+            }),
+          );
+        });
+        getTopRated().then((res) => {
+          setTopRatedFilms(res);
+          dispatch(
+            setMovies({
+              category: 'topRated',
+              movies: res,
+            }),
+          );
+        });
+        getNowPlaying().then((res) => {
+          setNowPlayingFilms(res);
+          dispatch(
+            setMovies({
+              category: 'nowPlaying',
+              movies: res,
+            }),
+          );
+        });
+        getUpcoming().then((res) => {
+          setUpcomingFilms(res);
+          dispatch(
+            setMovies({
+              category: 'upcoming',
+              movies: res,
+            }),
+          );
+        });
+        getLatest().then((res) => {
+          setLatestFilm(res);
+          dispatch(
+            setMovies({
+              category: 'latest',
+              movies: res,
+            }),
+          );
+        });
       });
     } else {
       setPreSavedMovies();
