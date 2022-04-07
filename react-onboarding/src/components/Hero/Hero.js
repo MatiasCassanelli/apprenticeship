@@ -31,10 +31,9 @@ const Hero = ({ movie }) => {
       <div className={styles.bottomGradient} />
       <div className="w-full absolute px-10 lg:px-[15%] top-[15vh]">
         <div className="text-4 mb-1 lg:mb-6">
-          {movie.release_date && (
-            <span>{new Date(movie.release_date).getFullYear()}</span>
-          )}
-          {movie.genres && <span> • {movie.genres.join(', ')}</span>}
+          {movie.release_date && new Date(movie.release_date).getFullYear()}
+          {movie.release_date && movie.genres?.length > 0 && ' • '}
+          {movie.genres?.length > 0 && movie.genres.join(', ')}
         </div>
         <div className="flex items-center w-full justify-between mb-5">
           <p className="text-[42px] leading-[36px] lg:text-[64px] lg:leading-[75px] uppercase flex-1 line-clamp-3 lg:line-clamp-2">
