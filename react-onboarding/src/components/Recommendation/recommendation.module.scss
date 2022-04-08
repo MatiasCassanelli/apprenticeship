@@ -1,0 +1,48 @@
+.gradient {
+  background: linear-gradient(
+    269deg,
+    rgba(0, 0, 0, 0.1098) 0.86%,
+    #000000 87.09%
+  );
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.hide {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: translateY(-50px);
+  transition: all 0.3s linear;
+  visibility: hidden;
+}
+
+.horizontalHide {
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50px);
+  transition: all 0.3s linear;
+  visibility: hidden;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.horizontalShow {
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  transform: translateX(0);
+  transition: all 0.3s linear;
+  visibility: visible;
+}

@@ -1,0 +1,14 @@
+.background {
+  background-image: url('../../../public/images/background.png');
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.loginForm {
+  width: 440px;
+  background: rgba(0, 0, 0, 0.81);
+  mix-blend-mode: normal;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

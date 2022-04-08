@@ -1,8 +1,16 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-extraneous-dependencies */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      lineClamp: {
+        8: '8',
+      },
+    },
   },
-  // eslint-disable-next-line global-require
-  plugins: [require('tw-elements/dist/plugin')],
+  plugins: [
+    require('tw-elements/dist/plugin'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };
