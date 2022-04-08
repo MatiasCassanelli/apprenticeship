@@ -3,7 +3,15 @@ import T from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import StarRating from '../StarRating/StarRating';
 
-const Overview = ({ overview, genres, id, className, rating }) => {
+const Overview = ({
+  overview,
+  genres,
+  id,
+  className,
+  rating,
+  isFavourite,
+  onMarkClick,
+}) => {
   const navigate = useNavigate();
   const onTrailerClick = () => {
     navigate(`/trailer/${id}`);
@@ -20,13 +28,21 @@ const Overview = ({ overview, genres, id, className, rating }) => {
         {overview}
       </p>
       <div className="flex items-center w-full flex-col lg:flex-row gap-2 lg:gap-[42px] mb-[32px] lg:mb-[46px]">
-        <div className="flex items-center">
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            onMarkClick();
+          }}
+        >
           <img
             src="/images/mark-hero.png"
             alt=""
             className="w-[14px] h-[18px] mr-4"
           />
-          <p className="text-[18px] text-[#92AAD7]">Watch Later</p>
+          <p className="text-[18px] text-[#92AAD7]">
+            {isFavourite ? 'Added to Watch Later' : 'Watch Later'}
+          </p>
         </div>
         <div
           className="flex items-center cursor-pointer"
@@ -62,6 +78,8 @@ Overview.propTypes = {
   className: T.string,
   id: T.number,
   rating: T.number,
+  onMarkClick: T.func,
+  isFavourite: T.bool,
 };
 
 Overview.defaultProps = {
@@ -70,4 +88,6 @@ Overview.defaultProps = {
   className: '',
   id: '',
   rating: 0,
+  onMarkClick: () => {},
+  isFavourite: false,
 };

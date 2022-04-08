@@ -4,23 +4,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import { setVideoTime } from '../../redux/player/actions';
 import { getPlayerTime } from '../../redux/player/selectors';
-import { getVideoUrl } from '../../services/movies';
+import { getMovieDetails } from '../../services/movies';
+import useWatchList from '../../hooks/useWatchList';
 
 const VideoPlayer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [movie, setMovie] = useState();
   const [videoSrc, setVideoSrc] = useState('');
   const [videoPlaying, setVideoPlaying] = useState(false);
   const dispatch = useDispatch();
   const prevTime = useSelector(getPlayerTime(id));
+  const { addToWatchList } = useWatchList();
 
   const videoRef = useRef();
   const currentTime = useRef(0);
 
   useEffect(() => {
-    getVideoUrl(id).then((videoUrl) => {
-      if (videoUrl) {
-        setVideoSrc(videoUrl);
+    getMovieDetails(id).then((_movie) => {
+      if (_movie?.trailerKey) {
+        setVideoSrc(_movie?.trailerKey);
+        setMovie(_movie);
       }
     });
   }, []);
@@ -37,6 +41,15 @@ const VideoPlayer = () => {
       dispatch(setVideoTime({ [id]: currentTime.current }));
     };
   }, [videoPlaying]);
+
+  useEffect(
+    () => () => {
+      if (movie && videoRef.current) {
+        addToWatchList(movie);
+      }
+    },
+    [movie],
+  );
 
   const onPlayerReady = (e) => {
     videoRef.current = e.target;

@@ -10,6 +10,8 @@ const VerticalAnimatedSlide = ({
   onClick,
   rating,
   id,
+  onMarkClick,
+  isFavourite,
 }) => (
   <div
     data-testid={id}
@@ -39,13 +41,19 @@ const VerticalAnimatedSlide = ({
             <StarRating rating={rating} className="mb-2" />
           </div>
           <div className="flex mt-1 w-full justify-between">
-            <div className="flex">
+            <div
+              className="flex"
+              onClick={(e) => {
+                e.stopPropagation();
+                onMarkClick();
+              }}
+            >
               <img
                 src="/images/white-mark.png"
                 className="w-[13px] h-[18px] lg:w-[15px] lg:h-[19px] mr-3"
                 alt=""
               />
-              Watch Later
+              {isFavourite ? 'Added to Watch Later' : 'Watch Later'}
             </div>
             <div className="flex">
               <img
@@ -72,6 +80,8 @@ VerticalAnimatedSlide.propTypes = {
   onClick: T.func,
   rating: T.number,
   id: T.number,
+  onMarkClick: T.func,
+  isFavourite: T.bool,
 };
 
 VerticalAnimatedSlide.defaultProps = {
@@ -81,4 +91,6 @@ VerticalAnimatedSlide.defaultProps = {
   onClick: () => {},
   rating: 0,
   id: '',
+  onMarkClick: () => {},
+  isFavourite: false,
 };

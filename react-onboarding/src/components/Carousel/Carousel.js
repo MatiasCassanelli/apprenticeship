@@ -4,6 +4,7 @@ import AnimatedSlide from '../Slide/AnimatedSlide';
 import VerticalAnimatedSlide from '../Slide/VerticalAnimatedSlide';
 import Slide from '../Slide/Slide';
 import getImageUrl from '../../utils/getImageUrl';
+import useFavourite from '../../hooks/useFavourite';
 
 const Carousel = ({
   slides,
@@ -22,6 +23,7 @@ const Carousel = ({
   const [maxScrollWidth, setMaxScrollWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedMovie, setSelectedMovie] = useState();
+  const { handleFavourite, isFavourite } = useFavourite();
 
   if (type === 'horizontal') {
     slideWidth = 270;
@@ -83,6 +85,16 @@ const Carousel = ({
     );
   }, []);
 
+  const getJustifyClass = () => {
+    if (isDisabled('prev')) {
+      return 'justify-end';
+    }
+    if (isDisabled('next')) {
+      return 'justify-start';
+    }
+    return 'justify-between';
+  };
+
   return slides.length ? (
     <div
       className="carousel mx-auto mb-6 lg:my-1.5 relative"
@@ -93,33 +105,37 @@ const Carousel = ({
       </h2>
       <div className="relative overflow-hidden">
         {/* Control begins */}
-        <div className="flex justify-between absolute top left w-full h-full">
-          <button
-            data-testid="prev-button"
-            type="button"
-            onClick={movePrev}
-            className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-            disabled={isDisabled('prev')}
-          >
-            <span
-              className="carousel-control-prev-icon inline-block bg-no-repeat"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            data-testid="next-button"
-            type="button"
-            onClick={moveNext}
-            className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
-            disabled={isDisabled('next')}
-          >
-            <span
-              className="carousel-control-next-icon inline-block bg-no-repeat"
-              aria-hidden="true"
-            />
-            <span className="visually-hidden">Next</span>
-          </button>
+        <div
+          className={`flex ${getJustifyClass()} absolute top left w-full h-full`}
+        >
+          {!isDisabled('prev') && (
+            <button
+              data-testid="prev-button"
+              type="button"
+              onClick={movePrev}
+              className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
+            >
+              <span
+                className="carousel-control-prev-icon inline-block bg-no-repeat"
+                aria-hidden="true"
+              />
+              <span className="visually-hidden">Previous</span>
+            </button>
+          )}
+          {!isDisabled('next') && (
+            <button
+              data-testid="next-button"
+              type="button"
+              onClick={moveNext}
+              className="hover:bg-black/50 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
+            >
+              <span
+                className="carousel-control-next-icon inline-block bg-no-repeat"
+                aria-hidden="true"
+              />
+              <span className="visually-hidden">Next</span>
+            </button>
+          )}
         </div>
         {/* Control ends */}
         {/* Carousel begins */}
@@ -130,7 +146,7 @@ const Carousel = ({
         >
           {slides.map((slide) => (
             <div
-              key={slide.id}
+              key={`${title}-${slide.id}`}
               className="snap-always relative snap-center md:snap-start cursor-pointer"
             >
               {recommendedCarousel && slide === selectedMovie && (
@@ -156,6 +172,8 @@ const Carousel = ({
                   slide === selectedMovie && 'border-4 border-white box-content'
                 }`}
                 rating={slide.vote_average}
+                onMarkClick={() => handleFavourite(slide)}
+                isFavourite={isFavourite(slide.id)}
               />
             </div>
           ))}
